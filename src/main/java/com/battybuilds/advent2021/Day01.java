@@ -12,6 +12,7 @@ public class Day01 {
                 count++;
             previous = i;
         }
+
         return count - 1;
     }
 }
