@@ -5,6 +5,6 @@ import java.util.List;
 public class Day01 {
 
     public int depthIncreaseCounter(List<Integer> input) {
-        return 1;
+        return input.size() - 1;
     }
 }
