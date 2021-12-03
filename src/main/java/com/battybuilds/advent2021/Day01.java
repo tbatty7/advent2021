@@ -15,4 +15,22 @@ public class Day01 {
 
         return count - 1;
     }
+
+    public int depthGroupIncreaseCounter(List<Integer> sonarReadings) {
+        int count = 0;
+        for (int i = 0; i+3 < sonarReadings.size(); i++) {
+            int readingsGroup1 = add3Readings(sonarReadings, i);
+            int readingsGroup2 = add3Readings(sonarReadings, i + 1);
+            if (readingsGroup1 < readingsGroup2)
+                count++;
+        }
+        return count;
+    }
+
+    private int add3Readings(List<Integer> sonarReadings, int i) {
+        Integer firstReading = sonarReadings.get(i);
+        Integer secondReading = sonarReadings.get(i+1);
+        Integer thirdReading = sonarReadings.get(i+2);
+        return firstReading + secondReading + thirdReading;
+    }
 }

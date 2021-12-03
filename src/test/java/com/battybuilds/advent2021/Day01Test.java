@@ -1,6 +1,5 @@
 package com.battybuilds.advent2021;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -51,6 +50,34 @@ class Day01Test {
         List<Integer> sonarReadings = pullInput("input01-1.txt");
         int depthIncreases = sonar.depthIncreaseCounter(sonarReadings);
         assertThat(depthIncreases).isEqualTo(1715);
+    }
+
+    @Test
+    void canCalculateIncreasesForGroupsOf3() {
+        List<Integer> sonarReadings = Arrays.asList(1, 2, 3, 4);
+        int depthIncreases = sonar.depthGroupIncreaseCounter(sonarReadings);
+        assertThat(depthIncreases).isEqualTo(1);
+    }
+
+    @Test
+    void canCalculateGroupIncreasesOnly() {
+        List<Integer> sonarReadings = Arrays.asList(1, 2, 3, 3);
+        int depthIncreases = sonar.depthGroupIncreaseCounter(sonarReadings);
+        assertThat(depthIncreases).isEqualTo(1);
+    }
+
+    @Test
+    void canCalculateGroupIncreasesWith10() {
+        List<Integer> sonarReadings = Arrays.asList(1, 2, 3, 3, 4, 1, 4, 1, 1, 5);
+        int depthIncreases = sonar.depthGroupIncreaseCounter(sonarReadings);
+        assertThat(depthIncreases).isEqualTo(4);
+    }
+
+    @Test
+    void canCalculateIncreasesWithBigInput() throws URISyntaxException, IOException {
+        List<Integer> sonarReadings = pullInput("input01-1.txt");
+        int depthIncreases = sonar.depthGroupIncreaseCounter(sonarReadings);
+        assertThat(depthIncreases).isEqualTo(1739);
     }
 
     private List<Integer> pullInput(String file) throws URISyntaxException, IOException {
