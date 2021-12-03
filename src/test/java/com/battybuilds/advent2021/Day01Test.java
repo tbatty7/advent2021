@@ -21,16 +21,21 @@ class Day01Test {
     @Test
     void canCalculateIncreaseOf1() {
         List<Integer> sonarReadings = Arrays.asList(1, 2);
-        int depthIncrease = sonar.depthIncreaseCounter(sonarReadings);
-        assertThat(depthIncrease).isEqualTo(1);
+        int depthIncreases = sonar.depthIncreaseCounter(sonarReadings);
+        assertThat(depthIncreases).isEqualTo(1);
     }
 
     @Test
     void canCalculateIncreaseOf2() {
         List<Integer> sonarReadings = Arrays.asList(1, 2, 3);
-        int depthIncrease = sonar.depthIncreaseCounter(sonarReadings);
-        assertThat(depthIncrease).isEqualTo(2);
+        int depthIncreases = sonar.depthIncreaseCounter(sonarReadings);
+        assertThat(depthIncreases).isEqualTo(2);
     }
 
-
+    @Test
+    void canCountOnlyIncreasesIfThereAreDecreases() {
+        List<Integer> sonarReadings = Arrays.asList(2, 1, 2);
+        int depthIncreases = sonar.depthIncreaseCounter(sonarReadings);
+        assertThat(depthIncreases).isEqualTo(1);
+    }
 }
