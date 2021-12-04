@@ -27,15 +27,17 @@ public class Day03 {
 
     String calculateGammaBinary(List<String> report) {
         String gammaBinary = "";
-        for (int index = 0; index < 5; index++) {
-            int finalIndex = index;
-            List<Character> firstChars =
-                    report.stream()
-                            .map(n -> n.charAt(finalIndex))
-                            .collect(Collectors.toList());
-            gammaBinary += calculateGammaBit(firstChars);
+        for (int i = 0; i < 5; i++) {
+            int index = i;
+            List<Character> bits = extractBitsFromPosition(report, index);
+            gammaBinary += calculateGammaBit(bits);
         }
         return gammaBinary;
+    }
+
+    private List<Character> extractBitsFromPosition(List<String> report, int index) {
+        return report.stream()
+                .map(n -> n.charAt(index)).collect(Collectors.toList());
     }
 
     private String calculateGammaBit(List<Character> firstChars) {
@@ -47,17 +49,6 @@ public class Day03 {
             } else {
                 zeroes++;
             }
-        }
-        return determineBit(ones, zeroes);
-    }
-
-    private String calculateFirstBit(String binaryNumber) {
-        int ones = 0;
-        int zeroes = 0;
-        if (binaryNumber.charAt(0) == '1') {
-            ones++;
-        } else {
-            zeroes++;
         }
         return determineBit(ones, zeroes);
     }
