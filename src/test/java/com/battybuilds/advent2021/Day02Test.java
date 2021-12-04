@@ -61,6 +61,20 @@ class Day02Test {
         assertThat(position).isEqualTo(520);
     }
 
+    @Test
+    void canCalculateCorrectPostionOfForward5_Down5_Forward8_Up3() {
+        List<String> directions = Arrays.asList("forward 5", "down 5", "forward 8", "up 3");
+        Integer position = navigation.calculateAccuratePosition(directions);
+        assertThat(position).isEqualTo(520);
+    }
+
+    @Test
+    void canCalculateCorrectPostionOfForward5_Down5_Forward8_Up3_down8_forward2() {
+        List<String> directions = Arrays.asList("forward 5", "down 5", "forward 8", "up 3", "down 8", "forward 2");
+        Integer position = navigation.calculateAccuratePosition(directions);
+        assertThat(position).isEqualTo(900);
+    }
+
     private List<String> pullInput(String file) throws URISyntaxException, IOException {
         Path path = Paths.get(getClass().getClassLoader().getResource(file).toURI());
         Stream<String> lines = Files.lines(path);
