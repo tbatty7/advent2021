@@ -30,4 +30,20 @@ class Day03Test {
         String gammaBinary = diagnosticTool.calculateGammaBinary(report);
         Assertions.assertThat(gammaBinary).isEqualTo("11011");
     }
+
+    @Test
+    void calculatePowerConsumptionForThreeBinaryNumbers() {
+        List<String> report = Arrays.asList("11011", "00100", "11011");
+        int powerConsumption = diagnosticTool.powerConsumptionCalculator(report);
+        Assertions.assertThat(powerConsumption).isEqualTo(108);
+    }
+
+    @Test
+    void calculatePowerConsumptionForTwelveBinaryNumbers() {
+        List<String> report = Arrays.asList("00100", "11110", "10110", "10111", "10101", "01111", "00111", "11100", "10000", "11001", "00010", "01010");
+
+        int powerConsumption = diagnosticTool.powerConsumptionCalculator(report);
+        Assertions.assertThat(powerConsumption).isEqualTo(198);
+    }
+
 }
