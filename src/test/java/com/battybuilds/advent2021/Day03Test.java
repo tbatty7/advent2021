@@ -129,6 +129,20 @@ class Day03Test {
         assertThat(binaryList.get(0)).isEqualTo("01010");
     }
 
+    @Test
+    void calculateLifeSupport() {
+        List<String> report = Arrays.asList("00100", "11110", "10110", "10111", "10101", "01111", "00111", "11100", "10000", "11001", "00010", "01010");
+        int lifeSupport = diagnosticTool.calculateLifeSupport(report);
+        assertThat(lifeSupport).isEqualTo(230);
+    }
+
+    @Test
+    void calculateLifeSupportForBigList() throws URISyntaxException, IOException {
+        List<String> report = pullInput("input03.txt");
+        int lifeSupport = diagnosticTool.calculateLifeSupport(report);
+        assertThat(lifeSupport).isEqualTo(2555739);
+    }
+
     private List<String> pullInput(String file) throws URISyntaxException, IOException {
         Path path = Paths.get(getClass().getClassLoader().getResource(file).toURI());
         Stream<String> lines = Files.lines(path);

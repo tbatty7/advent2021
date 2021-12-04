@@ -54,11 +54,13 @@ public class Day03 {
         return ones > zeroes;
     }
 
-    public List<String> calculateLifeSupport(List<String> report) {
+    public int calculateLifeSupport(List<String> report) {
         int lengthOfBinary = report.get(0).length();
         List<String> oxygenList = extractOxygen(report, lengthOfBinary);
         List<String> co2List = extractCo2(report, lengthOfBinary);
-        return co2List;
+        int oxygenRating = Integer.parseInt(oxygenList.get(0), 2);
+        int co2Rating = Integer.parseInt(co2List.get(0), 2);
+        return co2Rating * oxygenRating;
     }
 
     List<String> extractCo2(List<String> report, int lengthOfBinary) {
