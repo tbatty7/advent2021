@@ -4,6 +4,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.List;
 
 
 class Day03Test {
@@ -11,7 +12,8 @@ class Day03Test {
     @Test
     void name() {
         Day03 diagnosticTool = new Day03();
-        int powerConsumption = diagnosticTool.powerConsumptionCalculator(Arrays.asList("01001"));
-        Assertions.assertThat(powerConsumption).isEqualTo(9);
+        List<String> report = Arrays.asList("00100");
+        String powerConsumption = diagnosticTool.powerConsumptionCalculator(report);
+        Assertions.assertThat(powerConsumption).isEqualTo("1");
     }
 }
