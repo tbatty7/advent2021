@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Day03 {
 
-    public String powerConsumptionCalculator(List<String> report) {
+    public int powerConsumptionCalculator(List<String> report) {
         String binaryNumber = report.get(0);
         int gamma = Integer.parseInt(binaryNumber, 2);
         String epsilonBinary = "";
@@ -15,6 +15,7 @@ public class Day03 {
                 epsilonBinary+="1";
             }
         }
-        return epsilonBinary;
+        int epsilon = Integer.parseInt(epsilonBinary, 2);
+        return epsilon * gamma;
     }
 }

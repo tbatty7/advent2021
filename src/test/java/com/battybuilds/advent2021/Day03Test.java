@@ -10,10 +10,10 @@ import java.util.List;
 class Day03Test {
 
     @Test
-    void name() {
+    void calculatePowerConsumptionForOneBinary() {
         Day03 diagnosticTool = new Day03();
         List<String> report = Arrays.asList("00100");
-        String powerConsumption = diagnosticTool.powerConsumptionCalculator(report);
-        Assertions.assertThat(powerConsumption).isEqualTo("11011");
+        int powerConsumption = diagnosticTool.powerConsumptionCalculator(report);
+        Assertions.assertThat(powerConsumption).isEqualTo(108);
     }
 }
