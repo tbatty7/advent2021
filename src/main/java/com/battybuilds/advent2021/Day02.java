@@ -30,16 +30,18 @@ public class Day02 {
     public Integer calculateAccuratePosition(List<String> directions) {
         int distance = 0;
         int depth = 0;
+        int aim = 0;
         for (String instruction : directions) {
             if (instruction.contains("forward")) {
                 Integer number = extractNumber(instruction);
+                depth += aim * number;
                 distance += number;
             } else if (instruction.contains("down")) {
                 Integer number = extractNumber(instruction);
-                depth += number;
+                aim += number;
             } else {
                 Integer number = extractNumber(instruction);
-                depth -= number;
+                aim -= number;
             }
         }
         return distance * depth;

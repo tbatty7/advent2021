@@ -51,7 +51,14 @@ class Day02Test {
     void canCalculateCorrectPostionOfForward5_Down5() {
         List<String> directions = Arrays.asList("forward 5", "down 5");
         Integer position = navigation.calculateAccuratePosition(directions);
-        assertThat(position).isEqualTo(25);
+        assertThat(position).isEqualTo(0);
+    }
+
+    @Test
+    void canCalculateCorrectPostionOfForward5_Down5_Forward8() {
+        List<String> directions = Arrays.asList("forward 5", "down 5", "forward 8");
+        Integer position = navigation.calculateAccuratePosition(directions);
+        assertThat(position).isEqualTo(520);
     }
 
     private List<String> pullInput(String file) throws URISyntaxException, IOException {
