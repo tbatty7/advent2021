@@ -98,6 +98,37 @@ class Day03Test {
         assertThat(binaryList.get(0)).isEqualTo("0001");
     }
 
+    @Test
+    void filterListForCo2_FirstDigit() {
+        List<String> report = Arrays.asList("111111010011", "111111010010", "000000101100");
+        List<String> filteredReport = diagnosticTool.filterCo2Rating(report, 0);
+        assertThat(filteredReport.size()).isEqualTo(1);
+    }
+
+    @Test
+    void filterListForCo2_AllDigits_For5BinariesMatchingOnes() {
+        List<String> report = Arrays.asList("1111", "1110", "0000", "0101", "1011");
+        List<String> binaryList = diagnosticTool.extractCo2(report, 4);
+        assertThat(binaryList.size()).isEqualTo(1);
+        assertThat(binaryList.get(0)).isEqualTo("0000");
+    }
+
+    @Test
+    void filterOxygenFor12Values() {
+        List<String> report = Arrays.asList("00100", "11110", "10110", "10111", "10101", "01111", "00111", "11100", "10000", "11001", "00010", "01010");
+        List<String> binaryList = diagnosticTool.extractOxygen(report, 5);
+        assertThat(binaryList.size()).isEqualTo(1);
+        assertThat(binaryList.get(0)).isEqualTo("10111");
+    }
+
+    @Test
+    void filterCo2For12Values() {
+        List<String> report = Arrays.asList("00100", "11110", "10110", "10111", "10101", "01111", "00111", "11100", "10000", "11001", "00010", "01010");
+        List<String> binaryList = diagnosticTool.extractCo2(report, 5);
+        assertThat(binaryList.size()).isEqualTo(1);
+        assertThat(binaryList.get(0)).isEqualTo("01010");
+    }
+
     private List<String> pullInput(String file) throws URISyntaxException, IOException {
         Path path = Paths.get(getClass().getClassLoader().getResource(file).toURI());
         Stream<String> lines = Files.lines(path);

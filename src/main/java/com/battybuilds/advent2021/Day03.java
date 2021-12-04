@@ -57,16 +57,23 @@ public class Day03 {
     public List<String> calculateLifeSupport(List<String> report) {
         int lengthOfBinary = report.get(0).length();
         List<String> oxygenList = extractOxygen(report, lengthOfBinary);
-        List<String> co2List = report;
-        for (int i = 0; i < lengthOfBinary; i++) {
-            co2List = filterCo2Rating(co2List, i);
-        }
-        return oxygenList;
+        List<String> co2List = extractCo2(report, lengthOfBinary);
+        return co2List;
     }
 
-    private List<String> filterCo2Rating(List<String> report, int index) {
+    List<String> extractCo2(List<String> report, int lengthOfBinary) {
+        List<String> co2List = report;
+        for (int i = 0; i < lengthOfBinary; i++) {
+            if (co2List.size() == 1)
+                break;
+            co2List = filterCo2Rating(co2List, i);
+        }
+        return co2List;
+    }
+
+    List<String> filterCo2Rating(List<String> report, int index) {
         List<Character> bits = extractBitsFromPosition(report, index);
-        if (isMoreOnes(bits)) {
+        if (isMoreOnes(bits) || isEvenSplit(bits)) {
             return report.stream().filter(binary -> binary.charAt(index) == '0').collect(Collectors.toList());
         } else {
             return report.stream().filter(binary -> binary.charAt(index) == '1').collect(Collectors.toList());
@@ -76,6 +83,8 @@ public class Day03 {
     List<String> extractOxygen(List<String> report, int lengthOfBinary) {
         List<String> oxygenList = report;
         for (int i = 0; i < lengthOfBinary; i++) {
+            if (oxygenList.size() == 1)
+                break;
             oxygenList = filterOxygenRating(oxygenList, i);
         }
         return oxygenList;
