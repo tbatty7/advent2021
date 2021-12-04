@@ -8,10 +8,12 @@ public class Day03 {
         String binaryNumber = report.get(0);
         int gamma = Integer.parseInt(binaryNumber, 2);
         String epsilonBinary = "";
-        if (binaryNumber.charAt(0) == '1') {
-            epsilonBinary+="0";
-        } else {
-            epsilonBinary+="1";
+        for (int index = 0; index < 5; index++) {
+            if (binaryNumber.charAt(index) == '1') {
+                epsilonBinary+="0";
+            } else {
+                epsilonBinary+="1";
+            }
         }
         return epsilonBinary;
     }

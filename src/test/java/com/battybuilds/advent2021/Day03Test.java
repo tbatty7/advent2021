@@ -14,6 +14,6 @@ class Day03Test {
         Day03 diagnosticTool = new Day03();
         List<String> report = Arrays.asList("00100");
         String powerConsumption = diagnosticTool.powerConsumptionCalculator(report);
-        Assertions.assertThat(powerConsumption).isEqualTo("1");
+        Assertions.assertThat(powerConsumption).isEqualTo("11011");
     }
 }
