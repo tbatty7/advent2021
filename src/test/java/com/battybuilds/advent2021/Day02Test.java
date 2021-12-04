@@ -4,8 +4,15 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -30,5 +37,20 @@ class Day02Test {
         List<String> directions = Arrays.asList("forward 5", "down 5", "up 3");
         int position = navigation.calculatePosition(directions);
         Assertions.assertThat(position).isEqualTo(10);
+    }
+
+    @Test
+    void canCalculatePositionFromBigList() throws URISyntaxException, IOException {
+        List<String> directions = pullInput("input02.txt");
+        int position = navigation.calculatePosition(directions);
+        Assertions.assertThat(position).isEqualTo(1690020);
+    }
+
+    private List<String> pullInput(String file) throws URISyntaxException, IOException {
+        Path path = Paths.get(getClass().getClassLoader().getResource(file).toURI());
+        Stream<String> lines = Files.lines(path);
+        List<String> sonarReadings = lines.collect(Collectors.toList());
+        lines.close();
+        return sonarReadings;
     }
 }
