@@ -15,7 +15,7 @@ public class Day03 {
 
     private String calculateEpsilonBinary(String gammaBinary) {
         String epsilonBinary = "";
-        for (int index = 0; index < 5; index++) {
+        for (int index = 0; index < gammaBinary.length(); index++) {
             if (gammaBinary.charAt(index) == '1') {
                 epsilonBinary += "0";
             } else {
@@ -27,7 +27,8 @@ public class Day03 {
 
     String calculateGammaBinary(List<String> report) {
         String gammaBinary = "";
-        for (int i = 0; i < 5; i++) {
+        String firstBinary = report.get(0);
+        for (int i = 0; i < firstBinary.length(); i++) {
             int index = i;
             List<Character> bits = extractBitsFromPosition(report, index);
             gammaBinary += calculateGammaBit(bits);
