@@ -75,6 +75,13 @@ class Day02Test {
         assertThat(position).isEqualTo(900);
     }
 
+    @Test
+    void canCalculateCorrectPostionOfBigFile() throws URISyntaxException, IOException {
+        List<String> directions = pullInput("input02.txt");
+        Integer position = navigation.calculateAccuratePosition(directions);
+        assertThat(position).isEqualTo(1408487760);
+    }
+
     private List<String> pullInput(String file) throws URISyntaxException, IOException {
         Path path = Paths.get(getClass().getClassLoader().getResource(file).toURI());
         Stream<String> lines = Files.lines(path);
