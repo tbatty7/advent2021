@@ -26,4 +26,22 @@ public class Day02 {
         String number = instruction.substring(instruction.indexOf(" ")).trim();
         return new Integer(number);
     }
+
+    public Integer calculateAccuratePosition(List<String> directions) {
+        int distance = 0;
+        int depth = 0;
+        for (String instruction : directions) {
+            if (instruction.contains("forward")) {
+                Integer number = extractNumber(instruction);
+                distance += number;
+            } else if (instruction.contains("down")) {
+                Integer number = extractNumber(instruction);
+                depth += number;
+            } else {
+                Integer number = extractNumber(instruction);
+                depth -= number;
+            }
+        }
+        return distance * depth;
+    }
 }

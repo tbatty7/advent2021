@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class Day02Test {
@@ -29,21 +30,28 @@ class Day02Test {
     void canCalculatePostionOfForward5_Down5() {
         List<String> directions = Arrays.asList("forward 5", "down 5");
         int position = navigation.calculatePosition(directions);
-        Assertions.assertThat(position).isEqualTo(25);
+        assertThat(position).isEqualTo(25);
     }
 
     @Test
     void canCalculatePostionWithUpAndDownInstructions() {
         List<String> directions = Arrays.asList("forward 5", "down 5", "up 3");
         int position = navigation.calculatePosition(directions);
-        Assertions.assertThat(position).isEqualTo(10);
+        assertThat(position).isEqualTo(10);
     }
 
     @Test
     void canCalculatePositionFromBigList() throws URISyntaxException, IOException {
         List<String> directions = pullInput("input02.txt");
         int position = navigation.calculatePosition(directions);
-        Assertions.assertThat(position).isEqualTo(1690020);
+        assertThat(position).isEqualTo(1690020);
+    }
+
+    @Test
+    void canCalculateCorrectPostionOfForward5_Down5() {
+        List<String> directions = Arrays.asList("forward 5", "down 5");
+        Integer position = navigation.calculateAccuratePosition(directions);
+        assertThat(position).isEqualTo(25);
     }
 
     private List<String> pullInput(String file) throws URISyntaxException, IOException {
