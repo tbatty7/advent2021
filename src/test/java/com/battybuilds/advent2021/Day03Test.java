@@ -59,7 +59,7 @@ class Day03Test {
     void calculatePowerConsumptionForBigList() throws URISyntaxException, IOException {
         List<String> report = pullInput("input03.txt");
         int powerConsumption = diagnosticTool.powerConsumptionCalculator(report);
-        assertThat(powerConsumption).isEqualTo(198);
+        assertThat(powerConsumption).isEqualTo(3985686);
     }
 
     @Test
@@ -75,6 +75,12 @@ class Day03Test {
         int powerConsumption = diagnosticTool.powerConsumptionCalculator(report);
         assertThat(powerConsumption).isEqualTo(4051*44);
     }
+
+//    @Test
+//    void calculateLifeSupportFor3Binaries() {
+//        List<String> report = Arrays.asList("111111010011", "111111010011", "000000101100");
+//
+//    }
 
     private List<String> pullInput(String file) throws URISyntaxException, IOException {
         Path path = Paths.get(getClass().getClassLoader().getResource(file).toURI());

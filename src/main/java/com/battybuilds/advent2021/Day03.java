@@ -42,6 +42,11 @@ public class Day03 {
     }
 
     private String calculateGammaBit(List<Character> firstChars) {
+        if (isMoreOnes(firstChars)) return "1";
+        return "0";
+    }
+
+    private boolean isMoreOnes(List<Character> firstChars) {
         int ones = 0;
         int zeroes = 0;
         for (char bit : firstChars) {
@@ -51,11 +56,12 @@ public class Day03 {
                 zeroes++;
             }
         }
-        return determineBit(ones, zeroes);
+        boolean moreOnes = ones > zeroes;
+        return moreOnes;
     }
 
-    private String determineBit(int ones, int zeroes) {
-        return ones > zeroes ? "1" : "0";
+    public int calculateLifeSupport(List<String> report) {
+        List<Character> bits = extractBitsFromPosition(report, 0);
+        return 0;
     }
-
 }
