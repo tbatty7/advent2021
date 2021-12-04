@@ -83,7 +83,7 @@ class Day03Test {
     }
 
     @Test
-    void filterListForOxygen_AllDigits_For5Binaries() {
+    void filterListForOxygen_AllDigits_For5BinariesMatchingOnes() {
         List<String> report = Arrays.asList("1111", "1110", "0000", "1101", "1011");
         List<String> binaryList = diagnosticTool.extractOxygen(report, 4);
         assertThat(binaryList.size()).isEqualTo(1);
@@ -91,7 +91,7 @@ class Day03Test {
     }
 
     @Test
-    void name() {
+    void filterListForOxygen_AllDigits_For5BinariesMatchingZeroes() {
         List<String> report = Arrays.asList("0100", "0010", "0000", "0001", "1111");
         List<String> binaryList = diagnosticTool.extractOxygen(report, 4);
         assertThat(binaryList.size()).isEqualTo(1);
