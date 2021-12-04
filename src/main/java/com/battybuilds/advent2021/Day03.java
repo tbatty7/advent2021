@@ -1,5 +1,6 @@
 package com.battybuilds.advent2021;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,22 +47,66 @@ public class Day03 {
         return "0";
     }
 
-    private boolean isMoreOnes(List<Character> firstChars) {
+    private boolean isMoreOnes(List<Character> bits) {
+        List<Integer> onesAndZeroes = splitOnesAndZeroes(bits);
+        Integer ones = onesAndZeroes.get(0);
+        Integer zeroes = onesAndZeroes.get(1);
+        return ones > zeroes;
+    }
+
+    public List<String> calculateLifeSupport(List<String> report) {
+        int lengthOfBinary = report.get(0).length();
+        List<String> oxygenList = extractOxygen(report, lengthOfBinary);
+        List<String> co2List = report;
+        for (int i = 0; i < lengthOfBinary; i++) {
+            co2List = filterCo2Rating(co2List, i);
+        }
+        return oxygenList;
+    }
+
+    private List<String> filterCo2Rating(List<String> report, int index) {
+        List<Character> bits = extractBitsFromPosition(report, index);
+        if (isMoreOnes(bits)) {
+            return report.stream().filter(binary -> binary.charAt(index) == '0').collect(Collectors.toList());
+        } else {
+            return report.stream().filter(binary -> binary.charAt(index) == '1').collect(Collectors.toList());
+        }
+    }
+
+    List<String> extractOxygen(List<String> report, int lengthOfBinary) {
+        List<String> oxygenList = report;
+        for (int i = 0; i < lengthOfBinary; i++) {
+            oxygenList = filterOxygenRating(oxygenList, i);
+        }
+        return oxygenList;
+    }
+
+    List<String> filterOxygenRating(List<String> report, int index) {
+        List<Character> bits = extractBitsFromPosition(report, index);
+        if (isMoreOnes(bits) || isEvenSplit(bits)) {
+            return report.stream().filter(binary -> binary.charAt(index) == '1').collect(Collectors.toList());
+        } else {
+            return report.stream().filter(binary -> binary.charAt(index) == '0').collect(Collectors.toList());
+        }
+    }
+
+    private boolean isEvenSplit(List<Character> bits) {
+        List<Integer> onesAndZeroes = splitOnesAndZeroes(bits);
+        Integer ones = onesAndZeroes.get(0);
+        Integer zeroes = onesAndZeroes.get(1);
+        return ones == zeroes;
+    }
+
+    private List<Integer> splitOnesAndZeroes(List<Character> bits) {
         int ones = 0;
         int zeroes = 0;
-        for (char bit : firstChars) {
+        for (char bit : bits) {
             if (bit == '1') {
                 ones++;
             } else {
                 zeroes++;
             }
         }
-        boolean moreOnes = ones > zeroes;
-        return moreOnes;
-    }
-
-    public int calculateLifeSupport(List<String> report) {
-        List<Character> bits = extractBitsFromPosition(report, 0);
-        return 0;
+        return Arrays.asList(ones, zeroes);
     }
 }

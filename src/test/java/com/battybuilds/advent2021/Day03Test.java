@@ -1,6 +1,5 @@
 package com.battybuilds.advent2021;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -76,11 +75,28 @@ class Day03Test {
         assertThat(powerConsumption).isEqualTo(4051*44);
     }
 
-//    @Test
-//    void calculateLifeSupportFor3Binaries() {
-//        List<String> report = Arrays.asList("111111010011", "111111010011", "000000101100");
-//
-//    }
+    @Test
+    void filterListForOxygen_FirstDigit() {
+        List<String> report = Arrays.asList("111111010011", "111111010010", "000000101100");
+        List<String> filteredReport = diagnosticTool.filterOxygenRating(report, 0);
+        assertThat(filteredReport.size()).isEqualTo(2);
+    }
+
+    @Test
+    void filterListForOxygen_AllDigits_For5Binaries() {
+        List<String> report = Arrays.asList("1111", "1110", "0000", "1101", "1011");
+        List<String> binaryList = diagnosticTool.extractOxygen(report, 4);
+        assertThat(binaryList.size()).isEqualTo(1);
+        assertThat(binaryList.get(0)).isEqualTo("1111");
+    }
+
+    @Test
+    void name() {
+        List<String> report = Arrays.asList("0100", "0010", "0000", "0001", "1111");
+        List<String> binaryList = diagnosticTool.extractOxygen(report, 4);
+        assertThat(binaryList.size()).isEqualTo(1);
+        assertThat(binaryList.get(0)).isEqualTo("0001");
+    }
 
     private List<String> pullInput(String file) throws URISyntaxException, IOException {
         Path path = Paths.get(getClass().getClassLoader().getResource(file).toURI());
