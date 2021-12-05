@@ -1,5 +1,6 @@
 package com.battybuilds.advent2021;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -11,11 +12,14 @@ public class Day04 {
         return numbersToDraw.get(2);
     }
 
-    List<Integer> convertToObjects(List<String> boardsInput) {
-        String rowInput = boardsInput.get(0);
-        List<Integer> row = convertToList(rowInput, " ");
-        new BingoBoard(null);
-        return row;
+    List<List<Integer>> convertToObjects(List<String> boardsInput) {
+        List<List<Integer>> rows = new ArrayList<>();
+        for (String rowInput : boardsInput) {
+            List<Integer> row = convertToList(rowInput, " ");
+            rows.add(row);
+        }
+        BingoBoard bingoBoard = new BingoBoard(rows);
+        return rows;
     }
 
     private List<Integer> convertToList(String numbersToDrawInput, String delimiter) {

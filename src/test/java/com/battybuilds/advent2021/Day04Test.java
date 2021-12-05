@@ -46,7 +46,13 @@ class Day04Test {
     @Test
     void createBingoBoards() {
         List<String> boardsInput = Arrays.asList("22 13 17 11  0", " 8  2 23  4 24", "21  9 14 16  7", " 6 10  3 18  5", " 1 12 20 15 19");
-        List<Integer> objects = bingoRoom.convertToObjects(boardsInput);
+        List<List<Integer>> objects = bingoRoom.convertToObjects(boardsInput);
         assertThat(objects).isNotNull();
+        List<Integer> row1 = Arrays.asList(22, 13, 17, 11, 0);
+        List<Integer> row2 = Arrays.asList(8,2,23,4,24);
+        List<Integer> row3 = Arrays.asList(21,9,14,16,7);
+        List<Integer> row4 = Arrays.asList(6,10,3,18,5);
+        List<Integer> row5 = Arrays.asList(1,12,20,15,19);
+        assertThat(objects).isEqualTo(Arrays.asList(row1, row2, row3,row4,row5));
     }
 }
