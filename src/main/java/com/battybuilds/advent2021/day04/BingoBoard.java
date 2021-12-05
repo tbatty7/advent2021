@@ -3,18 +3,21 @@ package com.battybuilds.advent2021.day04;
 import java.util.List;
 
 public class BingoBoard {
-    private List<List<BingoBox>> boardRows;
+    private final List<List<BingoBox>> rows;
 
     public BingoBoard(List<List<BingoBox>> boardsInput) {
-        boardRows = boardsInput;
+        rows = boardsInput;
     }
 
     public List<List<BingoBox>> getRows() {
-        return boardRows;
+        return rows;
     }
 
-    public boolean checkForNumber(int numberCalled) {
-        boolean isBingo = false;
-        return isBingo;
+    public void markNumberCalled(int numberCalled) {
+        for (List<BingoBox> row : rows) {
+            for (BingoBox box : row) {
+                box.mark(numberCalled);
+            }
+        }
     }
 }

@@ -1,8 +1,8 @@
-package com.battybuilds.advent2021;
+package com.battybuilds.advent2021.day04;
 
 import com.battybuilds.advent2021.day04.BingoBoard;
 import com.battybuilds.advent2021.day04.BingoBox;
-import com.jayway.jsonpath.internal.function.latebinding.ILateBindingValue;
+import com.battybuilds.advent2021.day04.Day04;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +23,7 @@ class Day04Test {
     // 3.  What is the smallest problem I can start with writing a test about?
     //  X    a. Represent a caller calling a number, passing a list for caller to call
     //  X    a. Represent a board
-    //      b. Mark a number on a board when the caller calls it(Number may not appear on all boards)
+    //  X    b. Mark a number on a board when the caller calls it(Number may not appear on all boards)
     //      b. Represent a board winning
     //      c. If the 5 numbers in a row are marked, it wins
     //      d. If the 5 numbers in a column are marked, it wins
@@ -76,7 +76,6 @@ class Day04Test {
         List<Integer> row3 = Arrays.asList(21, 9, 14, 16, 7);
         List<Integer> row4 = Arrays.asList(6, 10, 3, 18, 5);
         List<Integer> row5 = Arrays.asList(1, 12, 20, 15, 19);
-        List<List<Integer>> board1 = Arrays.asList(row1, row2, row3, row4, row5);
-        return board1;
+        return Arrays.asList(row1, row2, row3, row4, row5);
     }
 }
