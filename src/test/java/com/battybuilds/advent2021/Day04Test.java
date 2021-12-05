@@ -1,5 +1,8 @@
 package com.battybuilds.advent2021;
 
+import com.battybuilds.advent2021.day04.BingoBoard;
+import com.battybuilds.advent2021.day04.BingoBox;
+import com.jayway.jsonpath.internal.function.latebinding.ILateBindingValue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,8 +21,8 @@ class Day04Test {
     //      c.
     // 2.  How to represent a number being called on a specific board
     // 3.  What is the smallest problem I can start with writing a test about?
-    //      a. Represent a caller calling a number, passing a list for caller to call
-    //      a. Represent a board
+    //  X    a. Represent a caller calling a number, passing a list for caller to call
+    //  X    a. Represent a board
     //      b. Mark a number on a board when the caller calls it(Number may not appear on all boards)
     //      b. Represent a board winning
     //      c. If the 5 numbers in a row are marked, it wins
@@ -44,12 +47,27 @@ class Day04Test {
     }
 
     @Test
-    void createBingoBoards() {
+    void convertToListOfOneBingoBoard() {
         List<String> boardsInput = Arrays.asList("22 13 17 11  0", " 8  2 23  4 24", "21  9 14 16  7", " 6 10  3 18  5", " 1 12 20 15 19");
-        BingoBoard bingoBoardOne = bingoRoom.convertToObjects(boardsInput);
-        assertThat(bingoBoardOne).isNotNull();
+        List<BingoBoard> bingoBoards = bingoRoom.convertToBingoBoards(boardsInput);
+        assertThat(bingoBoards).isNotNull();
+        assertThat(bingoBoards.get(0).getRows().size()).isEqualTo(5);
+    }
+
+    @Test
+    void convertSingleBingoBoardToRows() {
+        List<String> boardsInput = Arrays.asList("22 13 17 11  0", " 8  2 23  4 24", "21  9 14 16  7", " 6 10  3 18  5", " 1 12 20 15 19");
+        List<BingoBoard> bingoBoards = bingoRoom.convertToBingoBoards(boardsInput);
+        assertThat(bingoBoards).isNotNull();
         List<List<Integer>> boardOneRows = buildBingoBoardOneRows();
-        assertThat(bingoBoardOne.getRows()).isEqualTo(boardOneRows);
+        assertThat(bingoBoards.get(0).getRows().size()).isEqualTo(5);
+    }
+
+    @Test
+    void convertRowsOfIntegersToRowsOfBingoBoxes() {
+        List<List<Integer>> rowsOfIntegers = buildBingoBoardOneRows();
+        List<List<BingoBox>> rowsOfBingoBoxes = bingoRoom.convertToBingoBoxes(rowsOfIntegers);
+        assertThat(rowsOfBingoBoxes.get(0).get(0)).usingRecursiveComparison().isEqualTo(new BingoBox(22));
     }
 
     private List<List<Integer>> buildBingoBoardOneRows() {
