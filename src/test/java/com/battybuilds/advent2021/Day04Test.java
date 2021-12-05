@@ -1,13 +1,15 @@
 package com.battybuilds.advent2021;
 
-import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class Day04Test {
+    private Day04 bingoRoom;
 
     // Problems to solve
     // 1.  How to represent the bingo boards so you can identify which one won.
@@ -17,6 +19,7 @@ class Day04Test {
     // 2.  How to represent a number being called on a specific board
     // 3.  What is the smallest problem I can start with writing a test about?
     //      a. Represent a caller calling a number, passing a list for caller to call
+    //      a. Represent a board
     //      b. Mark a number on a board when the caller calls it(Number may not appear on all boards)
     //      b. Represent a board winning
     //      c. If the 5 numbers in a row are marked, it wins
@@ -27,10 +30,23 @@ class Day04Test {
     //      h. Sum all unmarked numbers
     //      i. Multiply winning boards unmarked numbers by the last number called
 
+    @BeforeEach
+    void setUp() {
+        bingoRoom = new Day04();
+    }
+
     @Test
-    void name() {
-        Day04 bingoRoom = new Day04();
-        int calledNumber = bingoRoom.caller(Arrays.asList(3));
-        Assertions.assertThat(calledNumber).isEqualTo(3);
+    void startCallerForOneNumber() {
+        List<String> boardsInput = Arrays.asList("22 13 17 11  0", " 8  2 23  4 24", "21  9 14 16  7", " 6 10  3 18  5", " 1 12 20 15 19");
+        String numbersToDrawInput = "4,10,3";
+        int calledNumber = bingoRoom.caller(numbersToDrawInput, boardsInput);
+        assertThat(calledNumber).isEqualTo(3);
+    }
+
+    @Test
+    void createBingoBoards() {
+        List<String> boardsInput = Arrays.asList("22 13 17 11  0", " 8  2 23  4 24", "21  9 14 16  7", " 6 10  3 18  5", " 1 12 20 15 19");
+        List<Integer> objects = bingoRoom.convertToObjects(boardsInput);
+        assertThat(objects).isNotNull();
     }
 }
