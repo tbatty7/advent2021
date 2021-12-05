@@ -4,9 +4,11 @@ import java.util.List;
 
 public class BingoBoard {
     private final List<List<BingoBox>> rows;
+    private final int boardNumber;
 
-    public BingoBoard(List<List<BingoBox>> boardsInput) {
+    public BingoBoard(List<List<BingoBox>> boardsInput, int boardNumber) {
         rows = boardsInput;
+        this.boardNumber = boardNumber;
     }
 
     public List<List<BingoBox>> getRows() {
@@ -19,5 +21,22 @@ public class BingoBoard {
                 box.mark(numberCalled);
             }
         }
+    }
+
+    public boolean isBingo() {
+        for (List<BingoBox> row : rows) {
+            int rowResult = 0;
+            for (BingoBox box : row) {
+                if (box.isMarked())
+                    rowResult++;
+            }
+            if (rowResult == 5)
+                return true;
+        }
+        return false;
+    }
+
+    public int getBoardNumber() {
+        return boardNumber;
     }
 }

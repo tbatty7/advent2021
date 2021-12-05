@@ -21,10 +21,10 @@ class Day04Test {
     //  X    a. Represent a caller calling a number, passing a list for caller to call
     //  X    a. Represent a board
     //  X    b. Mark a number on a board when the caller calls it(Number may not appear on all boards)
-    //      b. Represent a board winning
-    //      c. If the 5 numbers in a row are marked, it wins
-    //      d. If the 5 numbers in a column are marked, it wins
-    //      e. Handle multiple boards
+    //  X    b. Represent a board winning by having boards numbered and returning the number when a board wins
+    //  X    c. If the 5 numbers in a row are marked, it wins
+    //      d. Handle multiple boards
+    //      e. If the 5 numbers in a column are marked, it wins
     //      f. Return the winning board
     //      g. Identify the last number called when a board wins
     //      h. Sum all unmarked numbers
@@ -41,8 +41,8 @@ class Day04Test {
         String numbersToDrawInput = "13";
         int winnerScore = bingoRoom.startBingo(numbersToDrawInput, boardsInput);
         BingoBoard bingoBoardOne = bingoRoom.getBingoBoards().get(0);
-        assertThat(bingoBoardOne.getRows().get(0).get(1).isMarked()).isTrue();
         assertThat(bingoBoardOne.getRows().get(0).get(0).isMarked()).isFalse();
+        assertThat(bingoBoardOne.getRows().get(0).get(1).isMarked()).isTrue();
         assertThat(winnerScore).isEqualTo(0);
     }
 
@@ -70,8 +70,18 @@ class Day04Test {
     }
 
     @Test
-    void boardGetsBingo() {
-
+    void boardGetsBingoFromTopRow() {
+        List<String> boardsInput = Arrays.asList("22 13 17 11  0", " 8  2 23  4 24", "21  9 14 16  7", " 6 10  3 18  5", " 1 12 20 15 19");
+        String numbersToDrawInput = "22,13,17,11,0";
+        int winningBoard = bingoRoom.startBingo(numbersToDrawInput, boardsInput);
+        BingoBoard bingoBoardOne = bingoRoom.getBingoBoards().get(0);
+        List<BingoBox> topRow = bingoBoardOne.getRows().get(0);
+        assertThat(topRow.get(0).isMarked()).isTrue();
+        assertThat(topRow.get(1).isMarked()).isTrue();
+        assertThat(topRow.get(2).isMarked()).isTrue();
+        assertThat(topRow.get(3).isMarked()).isTrue();
+        assertThat(topRow.get(4).isMarked()).isTrue();
+        assertThat(winningBoard).isEqualTo(1);
     }
 
     private List<List<Integer>> buildBingoBoardOneRows() {
