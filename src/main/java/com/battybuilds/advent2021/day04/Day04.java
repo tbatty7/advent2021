@@ -1,20 +1,26 @@
 package com.battybuilds.advent2021.day04;
 
-import com.battybuilds.advent2021.day04.BingoBoard;
-import com.battybuilds.advent2021.day04.BingoBox;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Day04 {
-    public int caller(String numbersToDrawInput, List<String> boardsInput) {
+
+    private List<BingoBoard> bingoBoards;
+
+    public List<BingoBoard> getBingoBoards() {
+        return bingoBoards;
+    }
+
+    public int startBingo(String numbersToDrawInput, List<String> boardsInput) {
         List<Integer> numbersToDraw = convertToListOfIntegers(numbersToDrawInput, ",");
-        convertToBingoBoards(boardsInput);
-        return numbersToDraw.get(2);
+        bingoBoards = convertToBingoBoards(boardsInput);
+        for (Integer number : numbersToDraw) {
+            bingoBoards.forEach(bingoBoard -> bingoBoard.markNumberCalled(number));
+        }
+        return 0;
     }
 
     List<BingoBoard> convertToBingoBoards(List<String> boardsInput) {

@@ -1,8 +1,5 @@
 package com.battybuilds.advent2021.day04;
 
-import com.battybuilds.advent2021.day04.BingoBoard;
-import com.battybuilds.advent2021.day04.BingoBox;
-import com.battybuilds.advent2021.day04.Day04;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -39,11 +36,14 @@ class Day04Test {
     }
 
     @Test
-    void startCallerForOneNumber() {
+    void startBingoForOneNumber() {
         List<String> boardsInput = Arrays.asList("22 13 17 11  0", " 8  2 23  4 24", "21  9 14 16  7", " 6 10  3 18  5", " 1 12 20 15 19");
-        String numbersToDrawInput = "4,10,3";
-        int calledNumber = bingoRoom.caller(numbersToDrawInput, boardsInput);
-        assertThat(calledNumber).isEqualTo(3);
+        String numbersToDrawInput = "13";
+        int winnerScore = bingoRoom.startBingo(numbersToDrawInput, boardsInput);
+        BingoBoard bingoBoardOne = bingoRoom.getBingoBoards().get(0);
+        assertThat(bingoBoardOne.getRows().get(0).get(1).isMarked()).isTrue();
+        assertThat(bingoBoardOne.getRows().get(0).get(0).isMarked()).isFalse();
+        assertThat(winnerScore).isEqualTo(0);
     }
 
     @Test
@@ -59,7 +59,6 @@ class Day04Test {
         List<String> boardsInput = Arrays.asList("22 13 17 11  0", " 8  2 23  4 24", "21  9 14 16  7", " 6 10  3 18  5", " 1 12 20 15 19");
         List<BingoBoard> bingoBoards = bingoRoom.convertToBingoBoards(boardsInput);
         assertThat(bingoBoards).isNotNull();
-        List<List<Integer>> boardOneRows = buildBingoBoardOneRows();
         assertThat(bingoBoards.get(0).getRows().size()).isEqualTo(5);
     }
 
@@ -68,6 +67,11 @@ class Day04Test {
         List<List<Integer>> rowsOfIntegers = buildBingoBoardOneRows();
         List<List<BingoBox>> rowsOfBingoBoxes = bingoRoom.convertToBingoBoxes(rowsOfIntegers);
         assertThat(rowsOfBingoBoxes.get(0).get(0)).usingRecursiveComparison().isEqualTo(new BingoBox(22));
+    }
+
+    @Test
+    void boardGetsBingo() {
+
     }
 
     private List<List<Integer>> buildBingoBoardOneRows() {
