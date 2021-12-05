@@ -12,14 +12,14 @@ public class Day04 {
         return numbersToDraw.get(2);
     }
 
-    List<List<Integer>> convertToObjects(List<String> boardsInput) {
+    BingoBoard convertToObjects(List<String> boardsInput) {
         List<List<Integer>> rows = new ArrayList<>();
         for (String rowInput : boardsInput) {
             List<Integer> row = convertToList(rowInput, " ");
             rows.add(row);
         }
         BingoBoard bingoBoard = new BingoBoard(rows);
-        return rows;
+        return bingoBoard;
     }
 
     private List<Integer> convertToList(String numbersToDrawInput, String delimiter) {
