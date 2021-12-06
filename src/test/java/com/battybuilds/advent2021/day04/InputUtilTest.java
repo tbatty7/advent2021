@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.battybuilds.advent2021.day04.CoolUtil.convertToBingoBoxes;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class InputUtilTest {
@@ -29,6 +30,24 @@ class InputUtilTest {
         assertThat(numbersToDraw.size()).isEqualTo(5);
         assertThat(numbersToDraw.get(0)).isEqualTo(22);
         assertThat(numbersToDraw.get(4)).isEqualTo(0);
+    }
+
+    @Test
+    void canConvertToRowsOfBingoBoxes() {
+        List<String> rowsInput = buildSingleBoardRowsInput();
+        List<List<Integer>> bingoBoxRows = CoolUtil.convertToRowsOfIntegers(rowsInput);
+        assertThat(bingoBoxRows).isEqualTo(buildRowsForBingoBoard());
+    }
+
+    @Test
+    void convertRowsOfIntegersToRowsOfBingoBoxes() {
+        List<String> rowsInput = buildSingleBoardRowsInput();
+        List<List<BingoBox>> rowsOfBingoBoxes = convertToBingoBoxes(rowsInput);
+        assertThat(rowsOfBingoBoxes.get(0).get(0)).usingRecursiveComparison().isEqualTo(new BingoBox(22));
+    }
+
+    private List<String> buildSingleBoardRowsInput() {
+        return Arrays.asList("22 13 17 11  0", " 8  2 23  4 24", "21  9 14 16  7", " 6 10  3 18  5", " 1 12 20 15 19");
     }
 
     private List<List<Integer>> buildRowsForBingoBoard() {
