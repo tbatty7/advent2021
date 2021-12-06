@@ -25,8 +25,8 @@ class Day04Test {
     //  X    b. Represent a board winning by having boards numbered and returning the number when a board wins
     //  X    c. If the 5 numbers in a row are marked, it wins
     //  X    d. Handle multiple boards
-    //      e. If the 5 numbers in a column are marked, it wins
-    //      f. Return the winning board
+    //  X    e. If the 5 numbers in a column are marked, it wins
+    //  X    f. Return the winning board
     //      g. Identify the last number called when a board wins
     //      h. Sum all unmarked numbers
     //      i. Multiply winning boards unmarked numbers by the last number called

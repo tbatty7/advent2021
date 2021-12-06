@@ -27,7 +27,7 @@ class BingoBoardTest {
     }
 
     @Test
-    void boardGetsBingo() {
+    void boardGetsHorizontalBingo() {
         bingoBoard.markNumberCalled(22);
         bingoBoard.markNumberCalled(13);
         bingoBoard.markNumberCalled(17);
@@ -38,6 +38,21 @@ class BingoBoardTest {
         assertThat(bingoBoard.getRows().get(0).get(2).isMarked()).isTrue();
         assertThat(bingoBoard.getRows().get(0).get(3).isMarked()).isTrue();
         assertThat(bingoBoard.getRows().get(0).get(4).isMarked()).isTrue();
+        assertThat(bingoBoard.isBingo()).isTrue();
+    }
+
+    @Test
+    void boardGetsVerticalBingo() {
+        bingoBoard.markNumberCalled(22);
+        bingoBoard.markNumberCalled(8);
+        bingoBoard.markNumberCalled(21);
+        bingoBoard.markNumberCalled(6);
+        bingoBoard.markNumberCalled(1);
+        assertThat(bingoBoard.getRows().get(0).get(0).isMarked()).isTrue();
+        assertThat(bingoBoard.getRows().get(1).get(0).isMarked()).isTrue();
+        assertThat(bingoBoard.getRows().get(2).get(0).isMarked()).isTrue();
+        assertThat(bingoBoard.getRows().get(3).get(0).isMarked()).isTrue();
+        assertThat(bingoBoard.getRows().get(4).get(0).isMarked()).isTrue();
         assertThat(bingoBoard.isBingo()).isTrue();
     }
 
