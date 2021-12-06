@@ -6,7 +6,7 @@ public class Day04 {
     public int startBingo(String numbersToDrawInput, List<String> boardsInput) {
         BingoBoard winningBoard = new GameRoom().setupAndPlayBingo(numbersToDrawInput, boardsInput);
         if (winningBoard != null)
-            return winningBoard.getBoardNumber();
+            return winningBoard.getWinningNumber() * winningBoard.sumUpUnmarkedNumbers();
         else
             return 0;
     }

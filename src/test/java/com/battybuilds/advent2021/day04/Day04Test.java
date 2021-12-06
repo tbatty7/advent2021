@@ -28,7 +28,7 @@ class Day04Test {
     //  X    f. Return the winning board
     //  X    g. Identify the last number called when a board wins
     //  X    h. Sum all unmarked numbers
-    //      i. Multiply winning boards unmarked numbers by the last number called
+    //  X    i. Multiply winning boards unmarked numbers by the last number called
 
     @BeforeEach
     void setUp() {
@@ -40,8 +40,17 @@ class Day04Test {
         String numbersToDrawInput = "22,13,17,11,0";
         List<String> boardsInput = buildTwoBoardRowsInput();
         int winningBoard = bingoRoom.startBingo(numbersToDrawInput, boardsInput);
-        assertThat(winningBoard).isEqualTo(2);
+        assertThat(winningBoard).isEqualTo(0);
     }
+
+    @Test
+    void returnsResultOfWinningNumberMultipliedBySumOfUnmarkedNumbers() {
+        String numbersToDrawInput = "22,13,17,0,11";
+        List<String> boardsInput = buildTwoBoardRowsInput();
+        int resultOfWinner = bingoRoom.startBingo(numbersToDrawInput, boardsInput);
+        assertThat(resultOfWinner).isEqualTo(237 * 11);
+    }
+
 
     private List<String> buildTwoBoardRowsInput() {
         return Arrays.asList(
