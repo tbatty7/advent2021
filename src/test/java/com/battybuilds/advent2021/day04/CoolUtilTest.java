@@ -8,7 +8,7 @@ import java.util.List;
 import static com.battybuilds.advent2021.day04.CoolUtil.convertToBingoBoxes;
 import static org.assertj.core.api.Assertions.assertThat;
 
-class InputUtilTest {
+class CoolUtilTest {
     @Test
     void canConvertNumbersToDrawListOf_1() {
         String numbersToDrawInput = "13";

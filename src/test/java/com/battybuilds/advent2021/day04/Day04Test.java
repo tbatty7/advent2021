@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.battybuilds.advent2021.day04.CoolUtil.convertToBingoBoxes;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class Day04Test {
@@ -37,44 +36,11 @@ class Day04Test {
     }
 
     @Test
-    void startBingoForOneNumber() {
-        List<String> boardsInput = buildSingleBoardRowsInput();
-        String numbersToDrawInput = "13";
-        int winnerScore = bingoRoom.startBingo(numbersToDrawInput, boardsInput);
-        BingoBoard bingoBoardOne = bingoRoom.getBingoBoards().get(0);
-        assertThat(bingoBoardOne.getRows().get(0).get(0).isMarked()).isFalse();
-        assertThat(bingoBoardOne.getRows().get(0).get(1).isMarked()).isTrue();
-        assertThat(winnerScore).isEqualTo(0);
-    }
-
-    @Test
-    void convertRowsOfIntegersToRowsOfBingoBoxes() {
-        List<String> rowsInput = buildSingleBoardRowsInput();
-        List<List<BingoBox>> rowsOfBingoBoxes = convertToBingoBoxes(rowsInput);
-        assertThat(rowsOfBingoBoxes.get(0).get(0)).usingRecursiveComparison().isEqualTo(new BingoBox(22));
-    }
-
-    @Test
-    void boardGetsBingoFromTopRow() {
-        List<String> boardsInput = buildSingleBoardRowsInput();
-        String numbersToDrawInput = "22,13,17,11,0";
-        int winningBoardNumber = bingoRoom.startBingo(numbersToDrawInput, boardsInput);
-        BingoBoard bingoBoardOne = bingoRoom.getBingoBoards().get(0);
-        List<BingoBox> topRow = bingoBoardOne.getRows().get(0);
-        assertThat(topRow.get(0).isMarked()).isTrue();
-        assertThat(topRow.get(1).isMarked()).isTrue();
-        assertThat(topRow.get(2).isMarked()).isTrue();
-        assertThat(topRow.get(3).isMarked()).isTrue();
-        assertThat(topRow.get(4).isMarked()).isTrue();
-        assertThat(winningBoardNumber).isEqualTo(1);
-    }
-
-    @Test
-    void secondBingoBoardWinsWithHorizontalBingo() {
+    void secondBingoBoardWins() {
         String numbersToDrawInput = "22,13,17,11,0";
         List<String> boardsInput = buildTwoBoardRowsInput();
-        int winningBoardNumber = bingoRoom.startBingo(numbersToDrawInput, boardsInput);
-        assertThat(winningBoardNumber).isEqualTo(2);
+        int winningBoard = bingoRoom.startBingo(numbersToDrawInput, boardsInput);
+        assertThat(winningBoard).isEqualTo(2);
     }
 
     private List<String> buildTwoBoardRowsInput() {
@@ -83,7 +49,4 @@ class Day04Test {
                 "", "22 13 17 11  0", " 8  2 23  4 24", "21  9 14 16  7", " 6 10  3 18  5", " 1 12 20 15 19");
     }
 
-    private List<String> buildSingleBoardRowsInput() {
-        return Arrays.asList("22 13 17 11  0", " 8  2 23  4 24", "21  9 14 16  7", " 6 10  3 18  5", " 1 12 20 15 19");
-    }
 }
