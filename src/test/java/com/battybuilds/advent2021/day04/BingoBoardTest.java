@@ -56,4 +56,14 @@ class BingoBoardTest {
         assertThat(bingoBoard.isBingo()).isTrue();
     }
 
+    @Test
+    void boardCanSumUpUnmarkedBoxes() {
+        bingoBoard.markNumberCalled(22);
+        bingoBoard.markNumberCalled(13);
+        bingoBoard.markNumberCalled(17);
+        bingoBoard.markNumberCalled(11);
+        bingoBoard.markNumberCalled(0);
+        int result = bingoBoard.sumUpUnmarkedNumbers();
+        assertThat(result).isEqualTo(237);
+    }
 }

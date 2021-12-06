@@ -65,6 +65,17 @@ public class BingoBoard {
         return rowResult;
     }
 
+    public int sumUpUnmarkedNumbers() {
+        int result = 0;
+        for (List<BingoBox> row : rows) {
+            for (BingoBox box : row) {
+                if (!box.isMarked())
+                    result += box.getBoxNumber();
+            }
+        }
+        return result;
+    }
+
     public int getBoardNumber() {
         return boardNumber;
     }

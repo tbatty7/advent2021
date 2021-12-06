@@ -26,8 +26,8 @@ class Day04Test {
     //  X    d. Handle multiple boards
     //  X    e. If the 5 numbers in a column are marked, it wins
     //  X    f. Return the winning board
-    //      g. Identify the last number called when a board wins
-    //      h. Sum all unmarked numbers
+    //  X    g. Identify the last number called when a board wins
+    //  X    h. Sum all unmarked numbers
     //      i. Multiply winning boards unmarked numbers by the last number called
 
     @BeforeEach
