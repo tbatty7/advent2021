@@ -37,7 +37,7 @@ class Day04Test {
 
     @Test
     void startBingoForOneNumber() {
-        List<String> boardsInput = Arrays.asList("22 13 17 11  0", " 8  2 23  4 24", "21  9 14 16  7", " 6 10  3 18  5", " 1 12 20 15 19");
+        List<String> boardsInput = buildSingleBoardRowsInput();
         String numbersToDrawInput = "13";
         int winnerScore = bingoRoom.startBingo(numbersToDrawInput, boardsInput);
         BingoBoard bingoBoardOne = bingoRoom.getBingoBoards().get(0);
@@ -48,7 +48,7 @@ class Day04Test {
 
     @Test
     void convertToListOfOneBingoBoard() {
-        List<String> boardsInput = Arrays.asList("22 13 17 11  0", " 8  2 23  4 24", "21  9 14 16  7", " 6 10  3 18  5", " 1 12 20 15 19");
+        List<String> boardsInput = buildSingleBoardRowsInput();
         List<BingoBoard> bingoBoards = bingoRoom.convertToBingoBoards(boardsInput);
         assertThat(bingoBoards).isNotNull();
         assertThat(bingoBoards.get(0).getRows().size()).isEqualTo(5);
@@ -56,7 +56,7 @@ class Day04Test {
 
     @Test
     void convertSingleBingoBoardToRows() {
-        List<String> boardsInput = Arrays.asList("22 13 17 11  0", " 8  2 23  4 24", "21  9 14 16  7", " 6 10  3 18  5", " 1 12 20 15 19");
+        List<String> boardsInput = buildSingleBoardRowsInput();
         List<BingoBoard> bingoBoards = bingoRoom.convertToBingoBoards(boardsInput);
         assertThat(bingoBoards).isNotNull();
         assertThat(bingoBoards.get(0).getRows().size()).isEqualTo(5);
@@ -71,7 +71,7 @@ class Day04Test {
 
     @Test
     void boardGetsBingoFromTopRow() {
-        List<String> boardsInput = Arrays.asList("22 13 17 11  0", " 8  2 23  4 24", "21  9 14 16  7", " 6 10  3 18  5", " 1 12 20 15 19");
+        List<String> boardsInput = buildSingleBoardRowsInput();
         String numbersToDrawInput = "22,13,17,11,0";
         int winningBoardNumber = bingoRoom.startBingo(numbersToDrawInput, boardsInput);
         BingoBoard bingoBoardOne = bingoRoom.getBingoBoards().get(0);
@@ -86,9 +86,7 @@ class Day04Test {
 
     @Test
     void handlesMultipleBoardsInput() {
-        List<String> boardsInput = Arrays.asList(
-                "77 95 19 21 76", "93 92 62 35  3", " 4 29  7 41 45", "80 50 83 61 64", "39 32 91 56 48",
-                "", "22 13 17 11  0", " 8  2 23  4 24", "21  9 14 16  7", " 6 10  3 18  5", " 1 12 20 15 19");
+        List<String> boardsInput = buildTwoBoardRowsInput();
         List<BingoBoard> bingoBoards = bingoRoom.convertToBingoBoards(boardsInput);
         assertThat(bingoBoards.size()).isEqualTo(2);
         assertThat(bingoBoards.get(0).getBoardNumber()).as("wrong number of boards in list").isEqualTo(1);
@@ -103,11 +101,19 @@ class Day04Test {
     @Test
     void secondBingoBoardWinsWithHorizontalBingo() {
         String numbersToDrawInput = "22,13,17,11,0";
-        List<String> boardsInput = Arrays.asList(
-                "77 95 19 21 76", "93 92 62 35  3", " 4 29  7 41 45", "80 50 83 61 64", "39 32 91 56 48",
-                "", "22 13 17 11  0", " 8  2 23  4 24", "21  9 14 16  7", " 6 10  3 18  5", " 1 12 20 15 19");
+        List<String> boardsInput = buildTwoBoardRowsInput();
         int winningBoardNumber = bingoRoom.startBingo(numbersToDrawInput, boardsInput);
         assertThat(winningBoardNumber).isEqualTo(2);
+    }
+
+    private List<String> buildTwoBoardRowsInput() {
+        return Arrays.asList(
+                "77 95 19 21 76", "93 92 62 35  3", " 4 29  7 41 45", "80 50 83 61 64", "39 32 91 56 48",
+                "", "22 13 17 11  0", " 8  2 23  4 24", "21  9 14 16  7", " 6 10  3 18  5", " 1 12 20 15 19");
+    }
+
+    private List<String> buildSingleBoardRowsInput() {
+        return Arrays.asList("22 13 17 11  0", " 8  2 23  4 24", "21  9 14 16  7", " 6 10  3 18  5", " 1 12 20 15 19");
     }
 
     private List<List<Integer>> buildBingoBoardOneRows() {
