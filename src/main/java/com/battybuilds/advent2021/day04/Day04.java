@@ -1,7 +1,6 @@
 package com.battybuilds.advent2021.day04;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -46,8 +45,15 @@ public class Day04 {
     }
 
     List<BingoBoard> convertToBingoBoards(List<String> boardsInput) {
-        BingoBoard bingoBoard = convertToBingoBoard(boardsInput, 1);
-        return Collections.singletonList(bingoBoard);
+        List<BingoBoard> boards = new ArrayList<>();
+        int boardNumber = 1;
+        for (int i = 0; i < boardsInput.size(); i += 6) {
+            List<String> boardInput = boardsInput.subList(i, i + 5);
+            BingoBoard bingoBoard = convertToBingoBoard(boardInput, boardNumber);
+            boards.add(bingoBoard);
+            boardNumber++;
+        }
+        return boards;
     }
 
     BingoBoard convertToBingoBoard(List<String> boardsInput, int boardNumber) {
