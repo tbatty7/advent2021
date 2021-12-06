@@ -3,7 +3,9 @@ package com.battybuilds.advent2021.day04;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
+import static com.battybuilds.advent2021.day04.CoolUtil.convertStringToListOfIntegers;
+import static com.battybuilds.advent2021.day04.CoolUtil.convertToBingoBoxes;
 
 public class Day04 {
 
@@ -14,7 +16,7 @@ public class Day04 {
     }
 
     public int startBingo(String numbersToDrawInput, List<String> boardsInput) {
-        List<Integer> numbersToDraw = convertToListOfIntegers(numbersToDrawInput, ",");
+        List<Integer> numbersToDraw = convertStringToListOfIntegers(numbersToDrawInput, ",");
         bingoBoards = convertToBingoBoards(boardsInput);
         BingoBoard winningBoard = playBingo(numbersToDraw);
         if (winningBoard != null)
@@ -49,41 +51,15 @@ public class Day04 {
         int boardNumber = 1;
         for (int i = 0; i < boardsInput.size(); i += 6) {
             List<String> boardInput = boardsInput.subList(i, i + 5);
-            BingoBoard bingoBoard = convertToBingoBoard(boardInput, boardNumber);
+            BingoBoard bingoBoard = buildBingoBoard(boardInput, boardNumber);
             boards.add(bingoBoard);
             boardNumber++;
         }
         return boards;
     }
 
-    BingoBoard convertToBingoBoard(List<String> boardsInput, int boardNumber) {
-        List<List<Integer>> rowsOfIntegers = convertToRowsOfIntegers(boardsInput);
-        List<List<BingoBox>> rowsOfBingoBoxes = convertToBingoBoxes(rowsOfIntegers);
+    public BingoBoard buildBingoBoard(List<String> boardInput, int boardNumber) {
+        List<List<BingoBox>> rowsOfBingoBoxes = convertToBingoBoxes(boardInput);
         return new BingoBoard(rowsOfBingoBoxes, boardNumber);
-    }
-
-    List<List<BingoBox>> convertToBingoBoxes(List<List<Integer>> rowsOfIntegers) {
-        return rowsOfIntegers.stream()
-                .map(row -> row.stream()
-                        .map(BingoBox::new)
-                        .collect(Collectors.toList()))
-                .collect(Collectors.toList());
-    }
-
-    List<List<Integer>> convertToRowsOfIntegers(List<String> boardsInput) {
-        List<List<Integer>> rows = new ArrayList<>();
-        for (String rowInput : boardsInput) {
-            List<Integer> row = convertToListOfIntegers(rowInput, " ");
-            rows.add(row);
-        }
-        return rows;
-    }
-
-    private List<Integer> convertToListOfIntegers(String numbersToDrawInput, String delimiter) {
-        return Stream.of(numbersToDrawInput.split(delimiter))
-                .map(String::trim)
-                .filter(number -> !number.isEmpty())
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
     }
 }

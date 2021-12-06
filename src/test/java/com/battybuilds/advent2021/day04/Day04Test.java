@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.battybuilds.advent2021.day04.CoolUtil.convertToBingoBoxes;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class Day04Test {
@@ -23,7 +24,7 @@ class Day04Test {
     //  X    b. Mark a number on a board when the caller calls it(Number may not appear on all boards)
     //  X    b. Represent a board winning by having boards numbered and returning the number when a board wins
     //  X    c. If the 5 numbers in a row are marked, it wins
-    //      d. Handle multiple boards
+    //  X    d. Handle multiple boards
     //      e. If the 5 numbers in a column are marked, it wins
     //      f. Return the winning board
     //      g. Identify the last number called when a board wins
@@ -64,8 +65,8 @@ class Day04Test {
 
     @Test
     void convertRowsOfIntegersToRowsOfBingoBoxes() {
-        List<List<Integer>> rowsOfIntegers = buildBingoBoardOneRows();
-        List<List<BingoBox>> rowsOfBingoBoxes = bingoRoom.convertToBingoBoxes(rowsOfIntegers);
+        List<String> rowsInput = buildSingleBoardRowsInput();
+        List<List<BingoBox>> rowsOfBingoBoxes = convertToBingoBoxes(rowsInput);
         assertThat(rowsOfBingoBoxes.get(0).get(0)).usingRecursiveComparison().isEqualTo(new BingoBox(22));
     }
 
@@ -116,7 +117,7 @@ class Day04Test {
         return Arrays.asList("22 13 17 11  0", " 8  2 23  4 24", "21  9 14 16  7", " 6 10  3 18  5", " 1 12 20 15 19");
     }
 
-    private List<List<Integer>> buildBingoBoardOneRows() {
+    private List<List<Integer>> buildRowsForBingoBoard() {
         List<Integer> row1 = Arrays.asList(22, 13, 17, 11, 0);
         List<Integer> row2 = Arrays.asList(8, 2, 23, 4, 24);
         List<Integer> row3 = Arrays.asList(21, 9, 14, 16, 7);
