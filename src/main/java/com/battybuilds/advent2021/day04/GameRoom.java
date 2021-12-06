@@ -25,6 +25,7 @@ public class GameRoom {
             List<BingoBoard> winningBoardList = checkForWinner();
             if (someoneCalledBingo(winningBoardList)) {
                 BingoBoard winningBingoBoard = winningBoardList.get(0);
+                winningBingoBoard.setWinningNumber(number);
                 return winningBingoBoard;
             }
         }

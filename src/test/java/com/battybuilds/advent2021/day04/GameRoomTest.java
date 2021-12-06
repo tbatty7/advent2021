@@ -51,6 +51,14 @@ class GameRoomTest {
         assertThat(winningBoard.getBoardNumber()).isEqualTo(2);
     }
 
+    @Test
+    void winningBingoBoardKnowsLastNumberCalled() {
+        String numbersToDrawInput = "22,13,17,11,0";
+        List<String> boardsInput = buildTwoBoardRowsInput();
+        BingoBoard winningBoard = bingoRoom.setupAndPlayBingo(numbersToDrawInput, boardsInput);
+        assertThat(winningBoard.getWinningNumber()).isEqualTo(0);
+    }
+
     private List<String> buildTwoBoardRowsInput() {
         return Arrays.asList(
                 "77 95 19 21 76", "93 92 62 35  3", " 4 29  7 41 45", "80 50 83 61 64", "39 32 91 56 48",

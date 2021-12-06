@@ -5,6 +5,7 @@ import java.util.List;
 public class BingoBoard {
     private final List<List<BingoBox>> rows;
     private final int boardNumber;
+    private int winningNumber;
 
     public BingoBoard(List<List<BingoBox>> boardsInput, int boardNumber) {
         rows = boardsInput;
@@ -66,5 +67,13 @@ public class BingoBoard {
 
     public int getBoardNumber() {
         return boardNumber;
+    }
+
+    public int getWinningNumber() {
+        return winningNumber;
+    }
+
+    public void setWinningNumber(int winningNumber) {
+        this.winningNumber = winningNumber;
     }
 }
