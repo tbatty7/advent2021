@@ -2,6 +2,7 @@ package com.battybuilds.advent2021.day04;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import static com.battybuilds.advent2021.day04.CoolUtil.convertStringToListOfIntegers;
@@ -27,17 +28,19 @@ public class GameRoom {
 
     private BingoBoard playBingoAndReturnLoser(List<Integer> numbersToDraw) {
         ArrayList<BingoBoard> boardsByLoser = new ArrayList<>();
-        int orderOfWinning = 1;
+        AtomicInteger orderOfWinning = new AtomicInteger(1);
         for (Integer number : numbersToDraw) {
-            bingoBoards.forEach(bingoBoard -> bingoBoard.markNumberCalled(number));
-            List<BingoBoard> winningBoardList = checkForWinner();
-            if (someoneCalledBingo(winningBoardList)) {
-                BingoBoard winningBingoBoard = winningBoardList.get(0);
-                winningBingoBoard.setWinningNumber(number);
-                winningBingoBoard.setWinOrderTo(orderOfWinning);
-                boardsByLoser.add(0, winningBingoBoard);
-                orderOfWinning++;
-            }
+            bingoBoards.forEach(bingoBoard -> {
+                if (!bingoBoard.isBingo()) {
+                    bingoBoard.markNumberCalled(number);
+                    if (bingoBoard.isBingo()) {
+                        bingoBoard.setWinningNumber(number);
+                        bingoBoard.setWinOrderTo(orderOfWinning.get());
+                        orderOfWinning.getAndIncrement();
+                        boardsByLoser.add(0, bingoBoard);
+                    }
+                }
+            });
         }
         if (boardsByLoser.size() > 1)
             return boardsByLoser.get(0);
@@ -49,7 +52,7 @@ public class GameRoom {
         for (Integer number : numbersToDraw) {
             bingoBoards.forEach(bingoBoard -> bingoBoard.markNumberCalled(number));
             List<BingoBoard> winningBoardList = checkForWinner();
-            if (someoneCalledBingo(winningBoardList)) {
+            if (someoneCalledBingo(winningBoardList, orderOfWinning)) {
                 BingoBoard winningBingoBoard = winningBoardList.get(0);
                 winningBingoBoard.setWinningNumber(number);
                 winningBingoBoard.setWinOrderTo(orderOfWinning);
@@ -65,7 +68,7 @@ public class GameRoom {
                 .collect(Collectors.toList());
     }
 
-    private boolean someoneCalledBingo(List<BingoBoard> winningBoardList) {
-        return winningBoardList.size() == 1;
+    private boolean someoneCalledBingo(List<BingoBoard> winningBoardList, int numberOfPreviousWinners) {
+        return winningBoardList.size() == numberOfPreviousWinners;
     }
 }

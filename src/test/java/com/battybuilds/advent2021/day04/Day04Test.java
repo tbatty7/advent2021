@@ -57,7 +57,7 @@ class Day04Test {
     void secondBingoBoardWins() {
         String numbersToDrawInput = "22,13,17,11,0";
         List<String> boardsInput = buildTwoBoardRowsInput();
-        int winningBoard = bingoRoom.startBingo(numbersToDrawInput, boardsInput);
+        int winningBoard = bingoRoom.startBingo(numbersToDrawInput, boardsInput, true);
         assertThat(winningBoard).isEqualTo(0);
     }
 
@@ -65,18 +65,36 @@ class Day04Test {
     void returnsResultOfWinningNumberMultipliedBySumOfUnmarkedNumbers() {
         String numbersToDrawInput = "22,13,17,0,11";
         List<String> boardsInput = buildTwoBoardRowsInput();
-        int resultOfWinner = bingoRoom.startBingo(numbersToDrawInput, boardsInput);
+        int resultOfWinner = bingoRoom.startBingo(numbersToDrawInput, boardsInput, true);
         assertThat(resultOfWinner).isEqualTo(237 * 11);
     }
 
     @Test
-    void calculateAnswerFromBigList() throws URISyntaxException, IOException {
+    void calculateFirstWinnerFromBigList() throws URISyntaxException, IOException {
         List<String> input = pullInput();
         String numbersToDrawInput = input.get(0);
         input.remove(0);
         input.remove(0);
-        int resultOfWinner = bingoRoom.startBingo(numbersToDrawInput, input);
+        int resultOfWinner = bingoRoom.startBingo(numbersToDrawInput, input, true);
         assertThat(resultOfWinner).isEqualTo(21607);
+    }
+
+    @Test
+    void calculateLastWinner() {
+        String numbersToDrawInput = "27,4,9,5,11,17,23,2,0,14,21,24,10,16,13,6,15,25,12,22,18,20,8,19,3,26,1";
+        List<String> boardsInput = buildThreeBoardRowsInput();
+        int resultOfWinner = bingoRoom.startBingo(numbersToDrawInput, boardsInput, false);
+        assertThat(resultOfWinner).isEqualTo(1164);
+    }
+
+    @Test
+    void calculateLastWinnerFromBigList() throws URISyntaxException, IOException {
+        List<String> input = pullInput();
+        String numbersToDrawInput = input.get(0);
+        input.remove(0);
+        input.remove(0);
+        int resultOfWinner = bingoRoom.startBingo(numbersToDrawInput, input, false);
+        assertThat(resultOfWinner).isEqualTo(19012);
     }
 
     private List<String> pullInput() throws URISyntaxException, IOException {
@@ -85,6 +103,13 @@ class Day04Test {
         List<String> sonarReadings = lines.collect(Collectors.toList());
         lines.close();
         return sonarReadings;
+    }
+
+    private List<String> buildThreeBoardRowsInput() {
+        return Arrays.asList(
+                "22 13 17 11  0", " 8  2 23  4 24", "21  9 14 16  7", " 6 10  3 18  5", " 1 12 20 15 19",
+                "", " 3 15  0  2 22", " 9 18 13 17  5", "19  8  7 25 23", "20 11 10 24  4", "14 21 16 12  6",
+                "", "14 21 17 24  4", "10 16 15  9 19", "18  8 23 26 20", "22 11 13  6  5", " 2  0 12  3  7");
     }
 
     private List<String> buildTwoBoardRowsInput() {
