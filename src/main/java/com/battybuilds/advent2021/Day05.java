@@ -1,12 +1,14 @@
 package com.battybuilds.advent2021;
 
+import com.battybuilds.advent2021.day05.VentLine;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Day05 {
-    public List<ArrayList<List<Integer>>> convert(List<String> coordinates) {
+    public List<List<List<Integer>>> convert(List<String> coordinates) {
         return convertToSetsOfCoordinates(coordinates);
     }
 
@@ -23,12 +25,21 @@ public class Day05 {
         return linesOfCoordinates;
     }
 
-    static List<ArrayList<List<Integer>>> convertToSetsOfCoordinates(List<String> boardsInput) {
-        List<ArrayList<List<Integer>>> lines = new ArrayList<>();
+    static List<List<List<Integer>>> convertToSetsOfCoordinates(List<String> boardsInput) {
+        List<List<List<Integer>>> lines = new ArrayList<>();
         for (String rowInput : boardsInput) {
-            ArrayList<List<Integer>> line = convertStringToListOfStrings(rowInput, " -> ");
+            List<List<Integer>> line = convertStringToListOfStrings(rowInput, " -> ");
             lines.add(line);
         }
         return lines;
+    }
+
+    public List<VentLine> convertToLines(List<List<List<Integer>>> convertedCoordinateStrings) {
+        ArrayList<VentLine> ventLines = new ArrayList<>();
+        for (List<List<Integer>> coordinates : convertedCoordinateStrings) {
+            VentLine ventLine = new VentLine(coordinates.get(0), coordinates.get(1));
+            ventLines.add(ventLine);
+        }
+        return ventLines;
     }
 }
