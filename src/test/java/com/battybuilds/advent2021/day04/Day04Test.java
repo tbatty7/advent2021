@@ -3,8 +3,15 @@ package com.battybuilds.advent2021.day04;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -30,6 +37,18 @@ class Day04Test {
     //  X    h. Sum all unmarked numbers
     //  X    i. Multiply winning boards unmarked numbers by the last number called
 
+    // Second Exercise - find which board will win last and what it's score will be
+    // Problems to solve
+    // 1. Allow the game to continue if someone wins.
+    // 2. Still be able to tell who won first
+    // 3. Be able to tell who won last
+    // 4. After a board wins, stop counting it.
+    // 5. Have each board know the order it won in
+    // Feature slices
+    //      1. Maintain functionality and not stop when the first one wins
+    //      2. Have each number record the order it won in
+    //      3.
+
     @BeforeEach
     void setUp() {
         bingoRoom = new Day04();
@@ -51,6 +70,24 @@ class Day04Test {
         assertThat(resultOfWinner).isEqualTo(237 * 11);
     }
 
+    @Test
+    void calculateAnswerFromBigList() throws URISyntaxException, IOException {
+        List<String> input = pullInput("input04.txt");
+        String numbersToDrawInput = input.get(0);
+        input.remove(0);
+        input.remove(0);
+        int resultOfWinner = bingoRoom.startBingo(numbersToDrawInput, input);
+        assertThat(resultOfWinner).isEqualTo(21607);
+
+    }
+
+    private List<String> pullInput(String file) throws URISyntaxException, IOException {
+        Path path = Paths.get(getClass().getClassLoader().getResource(file).toURI());
+        Stream<String> lines = Files.lines(path);
+        List<String> sonarReadings = lines.collect(Collectors.toList());
+        lines.close();
+        return sonarReadings;
+    }
 
     private List<String> buildTwoBoardRowsInput() {
         return Arrays.asList(
