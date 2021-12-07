@@ -1,5 +1,6 @@
 package com.battybuilds.advent2021.day04;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,6 +17,31 @@ public class GameRoom {
         List<Integer> numbersToDraw = convertStringToListOfIntegers(numbersToDrawInput, ",");
         this.bingoBoards = new BoardBuilder().convertToBingoBoards(boardsInput);
         return playBingoAndReturnWinner(numbersToDraw);
+    }
+
+    public BingoBoard setupAndPlayBingoAndReturnLoser(String numbersToDrawInput, List<String> boardsInput) {
+        List<Integer> numbersToDraw = convertStringToListOfIntegers(numbersToDrawInput, ",");
+        this.bingoBoards = new BoardBuilder().convertToBingoBoards(boardsInput);
+        return playBingoAndReturnLoser(numbersToDraw);
+    }
+
+    private BingoBoard playBingoAndReturnLoser(List<Integer> numbersToDraw) {
+        ArrayList<BingoBoard> boardsByLoser = new ArrayList<>();
+        int orderOfWinning = 1;
+        for (Integer number : numbersToDraw) {
+            bingoBoards.forEach(bingoBoard -> bingoBoard.markNumberCalled(number));
+            List<BingoBoard> winningBoardList = checkForWinner();
+            if (someoneCalledBingo(winningBoardList)) {
+                BingoBoard winningBingoBoard = winningBoardList.get(0);
+                winningBingoBoard.setWinningNumber(number);
+                winningBingoBoard.setWinOrderTo(orderOfWinning);
+                boardsByLoser.add(0, winningBingoBoard);
+                orderOfWinning++;
+            }
+        }
+        if (boardsByLoser.size() > 1)
+            return boardsByLoser.get(0);
+        return null;
     }
 
     BingoBoard playBingoAndReturnWinner(List<Integer> numbersToDraw) {

@@ -45,8 +45,8 @@ class Day04Test {
     // 3. Be able to tell who won last
     // 4. After a board wins, stop counting it.
     // Feature slices
-    //      1. Have each board record the order it won in
-    //      2. Maintain functionality and not stop when the first one wins
+    //  X    1. Have each board record the order it won in
+    //  X    2. Maintain functionality and make it also able to tell the last one
 
     @BeforeEach
     void setUp() {
@@ -77,7 +77,6 @@ class Day04Test {
         input.remove(0);
         int resultOfWinner = bingoRoom.startBingo(numbersToDrawInput, input);
         assertThat(resultOfWinner).isEqualTo(21607);
-
     }
 
     private List<String> pullInput() throws URISyntaxException, IOException {
