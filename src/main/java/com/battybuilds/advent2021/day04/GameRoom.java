@@ -12,20 +12,21 @@ public class GameRoom {
         return bingoBoards;
     }
 
-    BingoBoard setupAndPlayBingo(String numbersToDrawInput, List<String> boardsInput) {
+    BingoBoard setupAndPlayBingoAndReturnWinner(String numbersToDrawInput, List<String> boardsInput) {
         List<Integer> numbersToDraw = convertStringToListOfIntegers(numbersToDrawInput, ",");
         this.bingoBoards = new BoardBuilder().convertToBingoBoards(boardsInput);
-        BingoBoard winningBoard = playBingo(numbersToDraw);
-        return winningBoard;
+        return playBingoAndReturnWinner(numbersToDraw);
     }
 
-    BingoBoard playBingo(List<Integer> numbersToDraw) {
+    BingoBoard playBingoAndReturnWinner(List<Integer> numbersToDraw) {
+        int orderOfWinning = 1;
         for (Integer number : numbersToDraw) {
             bingoBoards.forEach(bingoBoard -> bingoBoard.markNumberCalled(number));
             List<BingoBoard> winningBoardList = checkForWinner();
             if (someoneCalledBingo(winningBoardList)) {
                 BingoBoard winningBingoBoard = winningBoardList.get(0);
                 winningBingoBoard.setWinningNumber(number);
+                winningBingoBoard.setWinOrderTo(orderOfWinning);
                 return winningBingoBoard;
             }
         }

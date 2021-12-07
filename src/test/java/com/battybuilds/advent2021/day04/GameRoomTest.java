@@ -21,7 +21,7 @@ class GameRoomTest {
     void startBingoForOneNumberAndOneBoardAndNoWinner() {
         List<String> boardsInput = buildSingleBoardRowsInput();
         String numbersToDrawInput = "13";
-        BingoBoard winningBoard = bingoRoom.setupAndPlayBingo(numbersToDrawInput, boardsInput);
+        BingoBoard winningBoard = bingoRoom.setupAndPlayBingoAndReturnWinner(numbersToDrawInput, boardsInput);
         BingoBoard bingoBoardOne = bingoRoom.getBingoBoards().get(0);
         assertThat(bingoBoardOne.getRows().get(0).get(0).isMarked()).isFalse();
         assertThat(bingoBoardOne.getRows().get(0).get(1).isMarked()).isTrue();
@@ -32,7 +32,7 @@ class GameRoomTest {
     void boardGetsBingoFromTopRow() {
         List<String> boardsInput = buildSingleBoardRowsInput();
         String numbersToDrawInput = "22,13,17,11,0";
-        BingoBoard winningBoard = bingoRoom.setupAndPlayBingo(numbersToDrawInput, boardsInput);
+        BingoBoard winningBoard = bingoRoom.setupAndPlayBingoAndReturnWinner(numbersToDrawInput, boardsInput);
         BingoBoard bingoBoardOne = bingoRoom.getBingoBoards().get(0);
         List<BingoBox> topRow = bingoBoardOne.getRows().get(0);
         assertThat(topRow.get(0).isMarked()).isTrue();
@@ -47,7 +47,7 @@ class GameRoomTest {
     void secondBingoBoardWins() {
         String numbersToDrawInput = "22,13,17,11,0";
         List<String> boardsInput = buildTwoBoardRowsInput();
-        BingoBoard winningBoard = bingoRoom.setupAndPlayBingo(numbersToDrawInput, boardsInput);
+        BingoBoard winningBoard = bingoRoom.setupAndPlayBingoAndReturnWinner(numbersToDrawInput, boardsInput);
         assertThat(winningBoard.getBoardNumber()).isEqualTo(2);
     }
 
@@ -55,8 +55,17 @@ class GameRoomTest {
     void winningBingoBoardKnowsLastNumberCalled() {
         String numbersToDrawInput = "22,13,17,11,0";
         List<String> boardsInput = buildTwoBoardRowsInput();
-        BingoBoard winningBoard = bingoRoom.setupAndPlayBingo(numbersToDrawInput, boardsInput);
+        BingoBoard winningBoard = bingoRoom.setupAndPlayBingoAndReturnWinner(numbersToDrawInput, boardsInput);
         assertThat(winningBoard.getWinningNumber()).isEqualTo(0);
+    }
+
+    @Test
+    void shouldKnowIfItWonFirst() {
+        String numbersToDrawInput = "22,13,17,11,0";
+        List<String> boardsInput = buildTwoBoardRowsInput();
+        BingoBoard winningBoard = bingoRoom.setupAndPlayBingoAndReturnWinner(numbersToDrawInput, boardsInput);
+        assertThat(winningBoard.getBoardNumber()).isEqualTo(2);
+        assertThat(winningBoard.getWinningOrder()).isEqualTo(1);
     }
 
     private List<String> buildTwoBoardRowsInput() {

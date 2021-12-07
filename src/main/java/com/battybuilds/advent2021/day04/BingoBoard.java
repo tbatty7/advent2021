@@ -6,6 +6,7 @@ public class BingoBoard {
     private final List<List<BingoBox>> rows;
     private final int boardNumber;
     private int winningNumber;
+    private int winOrder;
 
     public BingoBoard(List<List<BingoBox>> boardsInput, int boardNumber) {
         rows = boardsInput;
@@ -86,5 +87,13 @@ public class BingoBoard {
 
     public void setWinningNumber(int winningNumber) {
         this.winningNumber = winningNumber;
+    }
+
+    public int getWinningOrder() {
+        return winOrder;
+    }
+
+    public void setWinOrderTo(int winOrder) {
+        this.winOrder = winOrder;
     }
 }

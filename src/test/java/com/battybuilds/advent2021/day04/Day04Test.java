@@ -10,6 +10,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -43,11 +44,9 @@ class Day04Test {
     // 2. Still be able to tell who won first
     // 3. Be able to tell who won last
     // 4. After a board wins, stop counting it.
-    // 5. Have each board know the order it won in
     // Feature slices
-    //      1. Maintain functionality and not stop when the first one wins
-    //      2. Have each number record the order it won in
-    //      3.
+    //      1. Have each board record the order it won in
+    //      2. Maintain functionality and not stop when the first one wins
 
     @BeforeEach
     void setUp() {
@@ -72,7 +71,7 @@ class Day04Test {
 
     @Test
     void calculateAnswerFromBigList() throws URISyntaxException, IOException {
-        List<String> input = pullInput("input04.txt");
+        List<String> input = pullInput();
         String numbersToDrawInput = input.get(0);
         input.remove(0);
         input.remove(0);
@@ -81,8 +80,8 @@ class Day04Test {
 
     }
 
-    private List<String> pullInput(String file) throws URISyntaxException, IOException {
-        Path path = Paths.get(getClass().getClassLoader().getResource(file).toURI());
+    private List<String> pullInput() throws URISyntaxException, IOException {
+        Path path = Paths.get(Objects.requireNonNull(getClass().getClassLoader().getResource("input04.txt")).toURI());
         Stream<String> lines = Files.lines(path);
         List<String> sonarReadings = lines.collect(Collectors.toList());
         lines.close();
