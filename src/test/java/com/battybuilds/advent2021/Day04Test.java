@@ -1,4 +1,4 @@
-package com.battybuilds.advent2021.day04;
+package com.battybuilds.advent2021;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

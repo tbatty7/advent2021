@@ -1,4 +1,7 @@
-package com.battybuilds.advent2021.day04;
+package com.battybuilds.advent2021;
+
+import com.battybuilds.advent2021.day04.BingoBoard;
+import com.battybuilds.advent2021.day04.GameRoom;
 
 import java.util.List;
 

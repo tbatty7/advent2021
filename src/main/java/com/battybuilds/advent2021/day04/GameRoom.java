@@ -14,7 +14,7 @@ public class GameRoom {
         return bingoBoards;
     }
 
-    BingoBoard setupAndPlayBingoAndReturnWinner(String numbersToDrawInput, List<String> boardsInput) {
+    public BingoBoard setupAndPlayBingoAndReturnWinner(String numbersToDrawInput, List<String> boardsInput) {
         List<Integer> numbersToDraw = convertStringToListOfIntegers(numbersToDrawInput, ",");
         this.bingoBoards = new BoardBuilder().convertToBingoBoards(boardsInput);
         return playBingoAndReturnWinner(numbersToDraw);
