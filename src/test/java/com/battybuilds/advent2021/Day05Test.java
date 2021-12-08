@@ -16,8 +16,8 @@ class Day05Test {
     // Small Slices
     //  X    0. convert input to list of list of list of integers
     //  X    1. convert input to line objects with coordinates
-    //      2. check if either the x or y match
-    //      3. show all numbers between the different coordinates x or y
+    //  X    2. check if either the x or y match
+    //  X    3. show all numbers between the different coordinates x or y
     //      4. draw straight horizontal line going forward
     //      5. draw straight horizontal line going backward
     //      6. draw straight vertical line going forward
