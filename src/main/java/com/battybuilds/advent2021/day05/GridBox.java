@@ -18,4 +18,8 @@ public class GridBox {
     public List<Integer> getCoords() {
         return coordinates;
     }
+
+    public void incrementVentCounter() {
+        countOfIntersections++;
+    }
 }

@@ -9,7 +9,9 @@ public class VentMapper {
         for (VentLine ventLine : ventLines) {
             List<List<Integer>> points = ventLine.drawLine();
             for (List<Integer> pointCoordinates : points) {
-                gridBoxes.add(new GridBox(pointCoordinates));
+                GridBox gridBox = new GridBox(pointCoordinates);
+                gridBox.incrementVentCounter();
+                gridBoxes.add(gridBox);
             }
         }
         return gridBoxes;

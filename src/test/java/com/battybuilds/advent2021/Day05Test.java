@@ -27,7 +27,7 @@ class Day05Test {
     //  X    7. draw straight vertical line going backward
     //  X     8. create GridBox object
     //  X     9. save all the GridBox objects in a list
-    //       10. make GridBox object identify if it has a path cross it
+    //  X     10. make GridBox object identify if it has a path cross it
     //       11. create Mapper class that increments a field on them if another one tries to be created.
 
 
