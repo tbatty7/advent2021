@@ -1,6 +1,5 @@
 package com.battybuilds.advent2021;
 
-import com.battybuilds.advent2021.day05.VentLine;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +15,7 @@ class Day05Test {
     // ?
     // Small Slices
     //  X    0. convert input to list of list of list of integers
-    //      1. convert input to objects of coordinates
+    //  X    1. convert input to line objects with coordinates
     //      2. check if either the x or y match
     //      3. show all numbers between the different coordinates x or y
     //      4. draw straight horizontal line going forward
@@ -36,15 +35,6 @@ class Day05Test {
         List<String> coordinates = coordinatesInput();
         List<List<List<Integer>>> convertedCoordinateStrings = ventMapper.convert(coordinates);
         assertThat(convertedCoordinateStrings.get(0)).isEqualTo(Arrays.asList(Arrays.asList(0, 9), Arrays.asList(5, 9)));
-    }
-
-    @Test
-    void canConvertInputToLineObjectsWithCoordinates() {
-        List<String> coordinates = coordinatesInput();
-        List<List<List<Integer>>> convertedCoordinates = ventMapper.convert(coordinates);
-        List<VentLine> ventLines = ventMapper.convertToLines(convertedCoordinates);
-        assertThat(ventLines.get(0).getStartingCoordinates()).isEqualTo(Arrays.asList(0, 9));
-        assertThat(ventLines.get(0).getEndingCoordinates()).isEqualTo(Arrays.asList(5, 9));
     }
 
     private List<String> coordinatesInput() {
