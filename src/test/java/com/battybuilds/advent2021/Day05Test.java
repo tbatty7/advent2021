@@ -1,12 +1,10 @@
 package com.battybuilds.advent2021;
 
-import com.battybuilds.advent2021.day05.GridBox;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 
@@ -29,6 +27,7 @@ class Day05Test {
     //  X     9. save all the GridBox objects in a list
     //  X     10. make GridBox object identify if it has a path cross it
     //  X     11. increment a field on GridBox if another one tries to be created with the same coords
+    //  X    12. Count GridBoxes with count of more than one
 
 
     @BeforeEach
@@ -37,11 +36,17 @@ class Day05Test {
     }
 
     @Test
-    void canMapCoordinates() {
-        List<String> coordinates = Collections.singletonList("0,9 -> 5,9");
-        List<GridBox> ventMap = ventDetector.reportVentDangers(coordinates);
-        GridBox expectedGridBox = new GridBox(Arrays.asList(0, 9));
-        Assertions.assertThat(ventMap.get(0).getCoords()).isEqualTo(expectedGridBox.getCoords());
+    void returnsDangerPointsForTwoVentLinesIntersecting() {
+        List<String> coordinates = Arrays.asList("0,9 -> 5,9", "6,9 -> 5,9");
+        Integer dangerpoints = ventDetector.reportVentDangers(coordinates);
+        Assertions.assertThat(dangerpoints).isEqualTo(1);
+    }
+
+    @Test
+    void returnsDangerPointsForFiveVentLinesIntersecting() {
+        List<String> coordinates = coordinatesInput();
+        Integer dangerpoints = ventDetector.reportVentDangers(coordinates);
+        Assertions.assertThat(dangerpoints).isEqualTo(9);
     }
 
     private List<String> coordinatesInput() {
