@@ -4,8 +4,16 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 class Day05Test {
@@ -46,7 +54,22 @@ class Day05Test {
     void returnsDangerPointsForFiveVentLinesIntersecting() {
         List<String> coordinates = coordinatesInput();
         Integer dangerpoints = ventDetector.reportVentDangers(coordinates);
-        Assertions.assertThat(dangerpoints).isEqualTo(9);
+        Assertions.assertThat(dangerpoints).isEqualTo(5);
+    }
+
+    @Test
+    void returnsDangerPointsForBigFile() throws URISyntaxException, IOException {
+        List<String> coordinates = pullInput();
+        Integer dangerpoints = ventDetector.reportVentDangers(coordinates);
+        Assertions.assertThat(dangerpoints).isEqualTo(5576);
+    }
+
+    private List<String> pullInput() throws URISyntaxException, IOException {
+        Path path = Paths.get(Objects.requireNonNull(getClass().getClassLoader().getResource("input05.txt")).toURI());
+        Stream<String> lines = Files.lines(path);
+        List<String> sonarReadings = lines.collect(Collectors.toList());
+        lines.close();
+        return sonarReadings;
     }
 
     private List<String> coordinatesInput() {

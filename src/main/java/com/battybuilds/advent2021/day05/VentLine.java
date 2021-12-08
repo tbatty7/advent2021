@@ -40,7 +40,7 @@ public class VentLine {
             addPointToBackwardLine(pointsInLine);
         } else if (isVertical() && isGoingUp()) {
             addPointToForwardVerticalLine(pointsInLine);
-        } else {
+        } else if (isVertical()) {
             addPointToBackwardVerticalLine(pointsInLine);
         }
         return pointsInLine;

@@ -26,7 +26,7 @@ public class VentMapper {
 
     private static List<GridBox> findGridBoxesCrossedBefore(List<GridBox> gridBoxes, List<Integer> pointCoordinates) {
         return gridBoxes.stream()
-                .filter(box -> box.getCoords().equals(pointCoordinates))
+                .filter(box -> box.getCoords().get(0).equals(pointCoordinates.get(0)) && box.getCoords().get(1).equals(pointCoordinates.get(1)))
                 .collect(Collectors.toList());
     }
 }
