@@ -27,4 +27,15 @@ class VentMapperTest {
         assertThat(ventMap.get(2).getCount()).isEqualTo(1);
         assertThat(ventMap.get(3).getCount()).isEqualTo(1);
     }
+
+    @Test
+    void tracksGridBoxesCrossedByTwoVentLines() {
+        List<Integer> endingCoordinates = Arrays.asList(3, 9);
+        VentLine ventline1 = new VentLine(Arrays.asList(0, 9), endingCoordinates);
+        VentLine ventline2 = new VentLine(Arrays.asList(5, 9), endingCoordinates);
+        List<VentLine> ventLines = Arrays.asList(ventline1, ventline2);
+        List<GridBox> ventMap = VentMapper.mapGridBoxes(ventLines);
+        assertThat(ventMap.get(3).getCount()).isEqualTo(2);
+        assertThat(ventMap.get(3).getCoords()).isEqualTo(endingCoordinates);
+    }
 }

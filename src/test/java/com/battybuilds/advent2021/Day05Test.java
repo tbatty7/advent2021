@@ -28,7 +28,7 @@ class Day05Test {
     //  X     8. create GridBox object
     //  X     9. save all the GridBox objects in a list
     //  X     10. make GridBox object identify if it has a path cross it
-    //       11. create Mapper class that increments a field on them if another one tries to be created.
+    //  X     11. increment a field on GridBox if another one tries to be created with the same coords
 
 
     @BeforeEach

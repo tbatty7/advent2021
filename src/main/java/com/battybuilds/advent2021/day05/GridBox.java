@@ -5,7 +5,7 @@ import java.util.List;
 public class GridBox {
     private final List<Integer> coordinates;
 
-    private int countOfIntersections = 0;
+    private int countOfIntersections = 1;
 
     public GridBox(List<Integer> coordinates) {
         this.coordinates = coordinates;
