@@ -38,8 +38,15 @@ class VentLineTest {
 
     @Test
     void canDrawHorizontalLineGoingForward() {
-        VentLine ventLine = new VentLine(Arrays.asList(0, 8), Arrays.asList(5, 8));
+        VentLine ventLine = new VentLine(Arrays.asList(0, 8), Arrays.asList(3, 8));
         List<List<Integer>> line = ventLine.drawLine();
-        assertThat(line).isEqualTo(Arrays.asList(Arrays.asList(0, 8), Arrays.asList(1, 8), Arrays.asList(2, 8), Arrays.asList(3, 8), Arrays.asList(4, 8), Arrays.asList(5, 8)));
+        assertThat(line).isEqualTo(Arrays.asList(Arrays.asList(0, 8), Arrays.asList(1, 8), Arrays.asList(2, 8), Arrays.asList(3, 8)));
+    }
+
+    @Test
+    void canDrawHorizontalLineGoingBackward() {
+        VentLine ventLine = new VentLine(Arrays.asList(3, 8), Arrays.asList(1, 8));
+        List<List<Integer>> line = ventLine.drawLine();
+        assertThat(line).isEqualTo(Arrays.asList(Arrays.asList(3, 8), Arrays.asList(2, 8), Arrays.asList(1, 8)));
     }
 }

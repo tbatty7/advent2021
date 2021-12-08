@@ -34,12 +34,29 @@ public class VentLine {
 
     public List<List<Integer>> drawLine() {
         List<List<Integer>> pointsInLine = new ArrayList<>();
-        if (isHorizontal()) {
-            for (int yCoordinate = startingCoordinates.get(0); yCoordinate <= endingCoordinates.get(0); yCoordinate++) {
-                Integer xCoordinate = this.endingCoordinates.get(1);
-                pointsInLine.add(Arrays.asList(yCoordinate, xCoordinate));
-            }
+        if (isHorizontal() && isGoingRight()) {
+            addPointToForwardLine(pointsInLine);
+        } else {
+            addPointToBackwardLine(pointsInLine);
         }
         return pointsInLine;
+    }
+
+    private void addPointToBackwardLine(List<List<Integer>> pointsInLine) {
+        for (int yCoordinate = startingCoordinates.get(0); yCoordinate >= endingCoordinates.get(0); yCoordinate--) {
+            Integer xCoordinate = this.endingCoordinates.get(1);
+            pointsInLine.add(Arrays.asList(yCoordinate, xCoordinate));
+        }
+    }
+
+    private void addPointToForwardLine(List<List<Integer>> pointsInLine) {
+        for (int yCoordinate = startingCoordinates.get(0); yCoordinate <= endingCoordinates.get(0); yCoordinate++) {
+            Integer xCoordinate = this.endingCoordinates.get(1);
+            pointsInLine.add(Arrays.asList(yCoordinate, xCoordinate));
+        }
+    }
+
+    private boolean isGoingRight() {
+        return startingCoordinates.get(0) < endingCoordinates.get(0);
     }
 }
