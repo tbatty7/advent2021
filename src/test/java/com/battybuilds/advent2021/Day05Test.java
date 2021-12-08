@@ -18,9 +18,9 @@ class Day05Test {
     //  X    1. convert input to line objects with coordinates
     //  X    2. check if either the x or y match
     //  X    3. show all numbers between the different coordinates x or y
-    //      4. draw straight horizontal line going forward
-    //      5. draw straight horizontal line going backward
-    //      6. draw straight vertical line going forward
+    //  X    4. draw straight horizontal line going forward
+    //  X    5. draw straight horizontal line going backward
+    //  X    6. draw straight vertical line going forward
     //      7. draw straight vertical line going backward
     //      8. create 9x9 map object and represent each GridBox with an object that can identify if it has a path cross it
 

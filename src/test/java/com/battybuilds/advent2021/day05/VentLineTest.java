@@ -49,4 +49,11 @@ class VentLineTest {
         List<List<Integer>> line = ventLine.drawLine();
         assertThat(line).isEqualTo(Arrays.asList(Arrays.asList(3, 8), Arrays.asList(2, 8), Arrays.asList(1, 8)));
     }
+
+    @Test
+    void canDrawVerticalLineGoingForward() {
+        VentLine ventLine = new VentLine(Arrays.asList(0, 1), Arrays.asList(0, 3));
+        List<List<Integer>> line = ventLine.drawLine();
+        assertThat(line).isEqualTo(Arrays.asList(Arrays.asList(0, 1), Arrays.asList(0, 2), Arrays.asList(0, 3)));
+    }
 }
