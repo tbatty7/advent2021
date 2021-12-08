@@ -51,9 +51,16 @@ class VentLineTest {
     }
 
     @Test
-    void canDrawVerticalLineGoingForward() {
+    void canDrawVerticalLineGoingForward_up() {
         VentLine ventLine = new VentLine(Arrays.asList(0, 1), Arrays.asList(0, 3));
         List<List<Integer>> line = ventLine.drawLine();
         assertThat(line).isEqualTo(Arrays.asList(Arrays.asList(0, 1), Arrays.asList(0, 2), Arrays.asList(0, 3)));
+    }
+
+    @Test
+    void canDrawVerticalLineGoingBackward_down() {
+        VentLine ventLine = new VentLine(Arrays.asList(0, 3), Arrays.asList(0, 1));
+        List<List<Integer>> line = ventLine.drawLine();
+        assertThat(line).isEqualTo(Arrays.asList(Arrays.asList(0, 3), Arrays.asList(0, 2), Arrays.asList(0, 1)));
     }
 }
