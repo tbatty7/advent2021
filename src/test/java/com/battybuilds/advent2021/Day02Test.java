@@ -44,7 +44,7 @@ class Day02Test {
     void canCalculatePositionFromBigList() throws URISyntaxException, IOException {
         List<String> directions = pullInput("input02.txt");
         int position = navigation.calculatePosition(directions);
-        assertThat(position).isEqualTo(1690020);
+        assertThat(position).isEqualTo(1693300);
     }
 
     @Test
@@ -79,7 +79,7 @@ class Day02Test {
     void canCalculateCorrectPostionOfBigFile() throws URISyntaxException, IOException {
         List<String> directions = pullInput("input02.txt");
         Integer position = navigation.calculateAccuratePosition(directions);
-        assertThat(position).isEqualTo(1408487760);
+        assertThat(position).isEqualTo(1857958050);
     }
 
     private List<String> pullInput(String file) throws URISyntaxException, IOException {

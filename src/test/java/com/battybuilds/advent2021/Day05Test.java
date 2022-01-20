@@ -1,5 +1,6 @@
 package com.battybuilds.advent2021;
 
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -61,7 +62,7 @@ class Day05Test {
     void returnsDangerPointsForBigFile() throws URISyntaxException, IOException {
         List<String> coordinates = pullInput();
         Integer dangerpoints = ventDetector.reportVentDangers(coordinates);
-        Assertions.assertThat(dangerpoints).isEqualTo(5576);
+        Assertions.assertThat(dangerpoints).isEqualTo(8111);
     }
 
     private List<String> pullInput() throws URISyntaxException, IOException {

@@ -76,7 +76,7 @@ class Day04Test {
         input.remove(0);
         input.remove(0);
         int resultOfWinner = bingoRoom.startBingo(numbersToDrawInput, input, true);
-        assertThat(resultOfWinner).isEqualTo(21607);
+        assertThat(resultOfWinner).isEqualTo(4662);
     }
 
     @Test
@@ -94,7 +94,7 @@ class Day04Test {
         input.remove(0);
         input.remove(0);
         int resultOfWinner = bingoRoom.startBingo(numbersToDrawInput, input, false);
-        assertThat(resultOfWinner).isEqualTo(19012);
+        assertThat(resultOfWinner).isEqualTo(12080);
     }
 
     private List<String> pullInput() throws URISyntaxException, IOException {

@@ -49,7 +49,7 @@ class Day01Test {
     void canCalculateBigList() throws URISyntaxException, IOException {
         List<Integer> sonarReadings = pullInput("input01.txt");
         int depthIncreases = sonar.depthIncreaseCounter(sonarReadings);
-        assertThat(depthIncreases).isEqualTo(1715);
+        assertThat(depthIncreases).isEqualTo(1233);
     }
 
     @Test
@@ -77,7 +77,7 @@ class Day01Test {
     void canCalculateIncreasesWithBigInput() throws URISyntaxException, IOException {
         List<Integer> sonarReadings = pullInput("input01.txt");
         int depthIncreases = sonar.depthGroupIncreaseCounter(sonarReadings);
-        assertThat(depthIncreases).isEqualTo(1739);
+        assertThat(depthIncreases).isEqualTo(1275);
     }
 
     private List<Integer> pullInput(String file) throws URISyntaxException, IOException {
